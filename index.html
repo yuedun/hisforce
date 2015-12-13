@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<title>韩豆咖派3.0后台管理系统</title>
+		<link href="./charisma-master/css/bootstrap-cerulean.min.css" rel="stylesheet">
+		<link href="./charisma-master/css/charisma-app.css" rel="stylesheet">
+	</head>
+	<body id="app">
+		<!-- topbar starts -->
+		<div class="navbar navbar-default" role="navigation">
+			<div class="navbar-inner">
+				<button type="button" class="navbar-toggle pull-left animated flip">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/admin">
+					<img alt="Charisma Logo" src="./charisma-master/img/favicon.ico" class="hidden-xs" />
+					<span>韩豆咖派</span></a>
+				<!-- user dropdown starts -->
+				<div class="btn-group pull-right">
+					<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						<i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">username</span>
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="/admin/logout">退出</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- topbar ends -->
+		<div class="ch-container">
+			<div class="row">
+				<!-- left menu starts -->
+				<div class="col-sm-2 col-lg-2">
+					<div class="sidebar-nav">
+						<div class="nav-canvas">
+							<div class="nav-sm nav nav-stacked"></div>
+							<ul class="nav nav-pills nav-stacked main-menu">
+								<li class="nav-header">主菜单</li>
+								<li><a class="ajax-link" v-link="{ path: '/foo' }"><i class="glyphicon glyphicon-star"></i><span>明星（粉丝团）管理</span></a></li>
+								<li class="ajax-link">
+									<a v-link="{ path: '/foo/bar' }"><i class="glyphicon glyphicon-bullhorn"></i><span>组织管理</span></a>
+								</li>
+								<li><a class="ajax-link" v-link="{ path: '/foo/baz' }"><i class="glyphicon glyphicon-eye-open"></i><span>频道管理 </span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- left menu ends -->
+				<!-- 中间内容显示区 starts  -->
+				<div id="content" class="col-lg-10 col-sm-10">
+					<div>
+						<ul class="breadcrumb">
+							<li><a href="#">首页</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-10 col-sm-10 col-xs-10">
+					<!-- 路由外链 -->
+					<router-view></router-view>
+				</div>
+				<!-- 中间内容显示区 ends  -->
+			</div>
+			<!-- 中间空白区 starts  -->
+			<div class="row">
+				
+			</div>
+			<!-- 中间空白区 ends  -->
+			<hr />
+			<!-- 底部版权信息 starts  -->
+			<footer class="row">
+				<p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="http://www.handouer.cn" target="_blank">韩豆</a>2014-2015</p>
+				<p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
+			</footer>
+			<!-- 底部版权信息 ends-->
+		</div>
+		<!-- requirejs导入需要的js插件以及自定义模块 -->
+		<script type="text/javascript" src="./bundle.js" charset="utf-8"></script>
+	</body>
+
+</html>
