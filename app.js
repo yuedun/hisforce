@@ -1,13 +1,13 @@
-var Vue = require('./vue.js');
-var VueRouter = require('./vue-router.min.js');
+var Vue = require('./vendor/vue');
+var VueRouter = require('./vendor/vue-router.min');
 Vue.use(VueRouter);
-var VueResource = require('./vue-resource.min');
+var VueResource = require('./vendor/vue-resource.min');
 Vue.use(VueResource);
 // 定义组件
 var Foo = Vue.extend({
 	template: '<div class="foo">' + 
-	'<h2>This is Foo!</h2>' + 
-	'<router-view></router-view>' + // <- 嵌套的外链
+	'<h1>这是首页内容!</h1>' + 
+	'<router-view></router-view>' + // <- 嵌套的外链，用于显示子页内容
 	'</div>'
 });
 
@@ -31,11 +31,16 @@ router.map({
 			'/bar': {
 				// 当匹配到/foo/bar时，会在Foo's <router-view>内渲染
 				// 一个Bar组件,可以是一个Vue.extend({})实例化组件，也可以是一个.vue后缀的文件组件
-				component: require('./h1.vue')
+				component: require('./views/h1.vue')
 			},
 			'/baz': {
-				// Baz也是一样，不同之处是匹配的路由会是/foo/baz
-				component: require('./list.vue')
+				// /foo/baz
+				component: require('./views/list.vue')
+			},
+			'/topic/:id': {
+				// /foo/topic
+				name: "topic",
+				component: require('./views/topic.vue')
 			}
 		}
 	}

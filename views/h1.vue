@@ -1,12 +1,10 @@
 <style>
-	h1 {
-		color: red;
-	}
+	
 </style>
 <template>
-	<h1>这是一个标题组件</h1>
+	<h3>这是一个标题组件</h3>
 	<div id="app3">
-	  <input v-model="newTodo" v-on:keyup.enter="addTodo">
+	  <input v-model="newTodo" v-on:keyup.enter="addTodo" placeholder="输入内容回车">
 	  <ul>
 	    <li v-for="todo in todos">
 	      <span>{{ todo.text }}</span>
