@@ -17,7 +17,12 @@ var App = Vue.extend({});
 
 // 创建一个路由器实例
 // 创建实例时可以传入配置参数进行定制，为保持简单，这里使用默认配置
-var router = new VueRouter();
+var router = new VueRouter({
+    hashbang: true,
+    history: false,
+    saveScrollPosition: true,
+    transitionOnLoad: true
+});
 
 // 定义路由规则
 // 每条路由规则应该映射到一个组件。这里的“组件”可以是一个使用 Vue.extend

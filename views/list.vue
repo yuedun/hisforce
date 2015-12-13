@@ -2,7 +2,7 @@
 	
 </style>
 <template>
-	<h3>获取一个列表path:'topic'</h3>
+	<h3>获取一个列表</h3>
 	<div id="app3">
 	  <ul>
 	    <li v-for="todo in todos">
