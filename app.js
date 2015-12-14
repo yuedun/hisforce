@@ -30,36 +30,39 @@ var router = new VueRouter({
 // 稍后我们会讲解嵌套路由
 router.map({
 	'/':{				//首页
-        name:'home',
-        component: require('./views/index.vue')
+        name:'login',
+        component: require('./views/login.vue')
     },
-	'/login': {
-		name: "login",
-		component: require('./views/login.vue')
-	},
-	'/foo': {
-		component: Foo,
+	'/index': {
+		name: "index",
+		component: require('./views/index.vue'),
 		// 在/foo下设置一个子路由
 		subRoutes: {
 			'/bar': {
 				// 当匹配到/foo/bar时，会在Foo's <router-view>内渲染
 				// 一个Bar组件,可以是一个Vue.extend({})实例化组件，也可以是一个.vue后缀的文件组件
+				name: "bar",
 				component: require('./views/h1.vue')
 			},
-			'/baz': {
+			'/list': {
 				// /foo/baz
+				name: "list",
 				component: require('./views/list.vue')
 			},
 			'/topic/:id': {
 				// /foo/topic
 				name: "topic",
 				component: require('./views/topic.vue')
+			},
+			'/doday_work': {
+				name: "todayWork",
+				component: require('./views/today_work.vue')
+			},
+			'/registered': {
+				name: "registered",
+				component: require('./views/registered.vue')
 			}
 		}
-	},
-	'/doday_work': {
-		name: "dodayWork",
-		component: require('./views/today_work.vue')
 	}
 });
 

@@ -8,6 +8,31 @@
 		<link rel="shortcut icon" href="./favicon.ico">
 	</head>
 	<body id="app">
+		<!-- topbar starts -->
+		<div class="navbar navbar-default" role="navigation">
+			<div class="navbar-inner">
+				<button type="button" class="navbar-toggle pull-left animated flip">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/admin">
+					<img alt="Charisma Logo" src="" class="hidden-xs" />
+					<span>云大夫</span></a>
+				<!-- user dropdown starts -->
+				<div class="btn-group pull-right">
+					<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						<i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs">username</span>
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="/admin/logout">退出</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- topbar ends -->
 		<div class="ch-container">
 			<div class="row">
 				<!-- 中间内容显示区 starts  -->
@@ -17,20 +42,21 @@
 			<hr />
 			<!-- 底部版权信息 starts  -->
 			<footer class="row">
-				<p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="http://www.handouer.cn" target="_blank">云大夫</a>2014-2015</p>
+				<p class="col-md-9 col-sm-9 col-xs-12 copyright">&copy; <a href="" target="_blank">云大夫</a>2014-2015</p>
 				<p class="col-md-3 col-sm-3 col-xs-12 powered-by">Powered by: <a href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
 			</footer>
 			<!-- 底部版权信息 ends-->
 		</div>
 		<!-- requirejs导入需要的js插件以及自定义模块 -->
 		<script type="text/javascript" src="./bundle.js" charset="utf-8"></script>
+		
 		<!--
 		<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="./charisma-master/js/charisma.js"></script>
 		<script src="./charisma-master/js/jquery.cookie.js"></script>
 		<script src="./charisma-master/js/jquery.history.js"></script>
-		<script src="./charisma-master/js/jquery.history.js"></script>
+		<script src="./charisma-master/bower_components/chosen/chosen.jquery.js"></script>
 		-->
 	</body>
 

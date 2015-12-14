@@ -1,17 +1,15 @@
 <template>
-    <!-- 全局header -->
-    <topbar></topbar>
+    <leftmenu></leftmenu>
+    <content></content>
 </template>
 <script>
     module.exports = {
         ready:function(){
             var _self = this;
-            setTimeout(function(){
-                _self.$route.router.go({ name: 'login'});
-            },2000);
         },
         components:{
-            "topbar":require('./topbar.vue')
+            "leftmenu": require("./leftmenu.vue"),
+            "content": require("./content.vue")
         }
     }
 </script>

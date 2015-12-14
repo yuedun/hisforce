@@ -134,47 +134,47 @@ function docReady() {
         e.preventDefault();
     });
 
-    //notifications
-    $('.noty').click(function (e) {
+    //notifications暂时不用
+   /* $('.noty').click(function (e) {
         e.preventDefault();
         var options = $.parseJSON($(this).attr('data-noty-options'));
         noty(options);
-    });
+    });*/
 
-    //chosen - improves select
-    $('[data-rel="chosen"],[rel="chosen"]').chosen();
+    //chosen - improves select 暂时不用
+    //$('[data-rel="chosen"],[rel="chosen"]').chosen();
 
-    //tabs
-    $('#myTab a:first').tab('show');
+    //tabs暂时不用
+    /*$('#myTab a:first').tab('show');
     $('#myTab a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
-    });
+    });*/
 
 
-    //tooltip
-    $('[data-toggle="tooltip"]').tooltip();
+    //tooltip 暂时不用
+    //$('[data-toggle="tooltip"]').tooltip();
 
-    //auto grow textarea
-    $('textarea.autogrow').autogrow();
+    //auto grow textarea 暂时不用
+    //$('textarea.autogrow').autogrow();
 
-    //popover
-    $('[data-toggle="popover"]').popover();
+    //popover 暂时不用
+    //$('[data-toggle="popover"]').popover();
 
-    //iOS / iPhone style toggle switch
-    $('.iphone-toggle').iphoneStyle();
+    //iOS / iPhone style toggle switch 暂时不用
+    //$('.iphone-toggle').iphoneStyle();
 
-    //star rating
-    $('.raty').raty({
+    //star rating 暂时不用
+    /*$('.raty').raty({
         score: 4 //default stars
-    });
+    });*/
 
-    //uploadify - multiple uploads
-    $('#file_upload').uploadify({
+    //uploadify - multiple uploads 暂时不用
+    /*$('#file_upload').uploadify({
         'swf': 'misc/uploadify.swf',
         'uploader': 'misc/uploadify.php'
         // Put your options here
-    });
+    });*/
 
     //gallery controls container animation
     $('ul.gallery li').hover(function () {
@@ -207,17 +207,17 @@ function docReady() {
         //alert($(this).parents('.thumbnail').attr('id'));
     });
 
-    //gallery colorbox
-    $('.thumbnail a').colorbox({
+    //gallery colorbox 暂时不用
+    /*$('.thumbnail a').colorbox({
         rel: 'thumbnail a',
         transition: "elastic",
         maxWidth: "95%",
         maxHeight: "95%",
         slideshow: true
-    });
+    });*/
 
-    //gallery fullscreen
-    $('#toggle-fullscreen').button().click(function () {
+    //gallery fullscreen 暂时不用
+    /*$('#toggle-fullscreen').button().click(function () {
         var button = $(this), root = document.documentElement;
         if (!button.hasClass('active')) {
             $('#thumbnails').addClass('modal-fullscreen');
@@ -234,16 +234,16 @@ function docReady() {
                 document.mozCancelFullScreen ||
                 $.noop).apply(document);
         }
-    });
+    });*/
 
-    //tour
-    if ($('.tour').length && typeof(tour) == 'undefined') {
+    //tour 暂时不用
+    /*if ($('.tour').length && typeof(tour) == 'undefined') {
         var tour = new Tour();
         tour.addStep({
-            element: "#content", /* html element next to which the step popover should be shown */
+            element: "#content", *//* html element next to which the step popover should be shown *//*
             placement: "top",
-            title: "Custom Tour", /* title of the popover */
-            content: "You can create tour like this. Click Next." /* content of the popover */
+            title: "Custom Tour", *//* title of the popover *//*
+            content: "You can create tour like this. Click Next." *//* content of the popover *//*
         });
         tour.addStep({
             element: ".theme-container",
@@ -270,9 +270,9 @@ function docReady() {
 
         tour.restart();
     }
-
-    //datatable
-    $('.datatable').dataTable({
+*/
+    //datatable 暂时不用
+    /*$('.datatable').dataTable({
         "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-12'i><'col-md-12 center-block'p>>",
         "sPaginationType": "bootstrap",
         "oLanguage": {
@@ -294,9 +294,9 @@ function docReady() {
         e.preventDefault();
         $('#myModal').modal('show');
     });
+    */
 
-
-    $('#calendar').fullCalendar({
+    /*$('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -342,13 +342,13 @@ function docReady() {
                 start: '2014-06-28'
             }
         ]
-    });
+    });*/
 
 }
 
 
-//additional functions for data table
-$.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
+//additional functions for data table 暂时不用
+/*$.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
     return {
         "iStart": oSettings._iDisplayStart,
         "iEnd": oSettings.fnDisplayEnd(),
@@ -358,7 +358,7 @@ $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
         "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
         "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
     };
-}
+};
 $.extend($.fn.dataTableExt.oPagination, {
     "bootstrap": {
         "fnInit": function (oSettings, nPaging, fnDraw) {
@@ -433,4 +433,4 @@ $.extend($.fn.dataTableExt.oPagination, {
             }
         }
     }
-});
+});*/
