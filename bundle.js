@@ -81,7 +81,7 @@
 	    },
 		'/login': {
 			name: "login",
-			component: __webpack_require__(14)
+			component: __webpack_require__(16)
 		},
 		'/foo': {
 			component: Foo,
@@ -90,22 +90,22 @@
 				'/bar': {
 					// 当匹配到/foo/bar时，会在Foo's <router-view>内渲染
 					// 一个Bar组件,可以是一个Vue.extend({})实例化组件，也可以是一个.vue后缀的文件组件
-					component: __webpack_require__(19)
+					component: __webpack_require__(22)
 				},
 				'/baz': {
 					// /foo/baz
-					component: __webpack_require__(26)
+					component: __webpack_require__(29)
 				},
 				'/topic/:id': {
 					// /foo/topic
 					name: "topic",
-					component: __webpack_require__(31)
+					component: __webpack_require__(34)
 				}
 			}
 		},
 		'/doday_work': {
 			name: "dodayWork",
-			component: __webpack_require__(36)
+			component: __webpack_require__(39)
 		}
 	});
 
@@ -9463,7 +9463,7 @@
 	module.exports = __webpack_require__(12)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(13)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(15)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -9478,7 +9478,7 @@
 
 /***/ },
 /* 12 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -9486,11 +9486,7 @@
 
 	//     <!-- 全局header -->
 
-	//     <div>
-
-	//         首页
-
-	//     </div>
+	//     <topbar></topbar>
 
 	// </template>
 
@@ -9501,24 +9497,50 @@
 	        setTimeout(function () {
 	            _self.$route.router.go({ name: 'login' });
 	        }, 2000);
+	    },
+	    components: {
+	        "topbar": __webpack_require__(13)
 	    }
 	};
 	// </script>
 
 /***/ },
 /* 13 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<!-- 全局header -->\r\n    <div>\r\n        首页\r\n    </div>";
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(14)
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "F:\\NodejsProject\\vue-test\\views\\topbar.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	  }
+	})()}
 
 /***/ },
 /* 14 */
+/***/ function(module, exports) {
+
+	module.exports = "<!-- topbar starts -->\r\n<div class=\"navbar navbar-default\" role=\"navigation\">\r\n\t<div class=\"navbar-inner\">\r\n\t\t<button type=\"button\" class=\"navbar-toggle pull-left animated flip\">\r\n\t\t\t<span class=\"sr-only\">Toggle navigation</span>\r\n\t\t\t<span class=\"icon-bar\"></span>\r\n\t\t\t<span class=\"icon-bar\"></span>\r\n\t\t\t<span class=\"icon-bar\"></span>\r\n\t\t</button>\r\n\t\t<a class=\"navbar-brand\" href=\"/admin\">\r\n\t\t\t<img alt=\"Charisma Logo\" src=\"xxxHTMLLINKxxx0.95865941187366840.48945114272646606xxx\" class=\"hidden-xs\" />\r\n\t\t\t<span>云大夫</span></a>\r\n\t\t<!-- user dropdown starts -->\r\n\t\t<div class=\"btn-group pull-right\">\r\n\t\t\t<button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\r\n\t\t\t\t<i class=\"glyphicon glyphicon-user\"></i><span class=\"hidden-sm hidden-xs\">username</span>\r\n\t\t\t\t<span class=\"caret\"></span>\r\n\t\t\t</button>\r\n\t\t\t<ul class=\"dropdown-menu\">\r\n\t\t\t\t<li><a href=\"/admin/logout\">退出</a></li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</div>\r\n</div>\r\n<!-- topbar ends -->";
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = "<!-- 全局header -->\r\n    <topbar></topbar>";
+
+/***/ },
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(15)
+	module.exports = __webpack_require__(17)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(18)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(21)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -9532,14 +9554,18 @@
 	})()}
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
+
+	var _stringify = __webpack_require__(18);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// <template>
-
-	//     <nvHead></nvHead>
 
 	// 	<div class="row">
 
@@ -9567,7 +9593,7 @@
 
 	//                         <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
 
-	//                         <input type="text" id="username" name="userName" class="form-control" placeholder="用户名" value="" required="required">
+	//                         <input type="text" id="username" v-model="username" class="form-control" placeholder="用户名" value="" required="required">
 
 	//                     </div>
 
@@ -9577,7 +9603,7 @@
 
 	//                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
 
-	//                         <input type="password" id="password" name="passWord" class="form-control" placeholder="密码" value=""  required="required">
+	//                         <input type="password" id="password" v-model="password" class="form-control" placeholder="密码" value=""  required="required">
 
 	//                     </div>
 
@@ -9598,155 +9624,65 @@
 	// </template>
 
 	// <script>
-	var browser = {
-	    versions: (function () {
-	        var u = navigator.userAgent,
-	            app = navigator.appVersion;
-	        return { //移动终端浏览器版本信息
-	            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-	            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
-	            iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
-	            iPad: u.indexOf('iPad') > -1 };
-	    })()
-	};
-	//是否iPad
 	module.exports = {
 	    data: function data() {
-	        var self = this;
 	        return {
-	            token: '',
-	            /*弱提示*/
-	            alert: {
-	                txt: '',
-	                show: false,
-	                hideFn: function hideFn() {
-	                    var timer;
-	                    clearTimeout(timer);
-	                    timer = setTimeout(function () {
-	                        self.alert.show = false;
-	                    }, 1000);
-	                }
-	            },
-	            loading: {
-	                show: false,
-	                showTxt: '登录中……'
-	            }
+	            username: "",
+	            password: ""
 	        };
 	    },
 	    methods: {
 	        logon: function logon() {
-	            var self = this;
-	            if (self.token == '') {
-	                var text = "令牌格式错误,应为36位UUID字符串";
-	                self.alert.txt = text;
-	                self.alert.show = true;
-	                self.alert.hideFn();
-	                return false;
-	            }
-	            $.ajax({
-	                type: 'POST',
-	                url: 'https://cnodejs.org/api/v1/accesstoken',
-	                data: { accesstoken: self.token },
-	                dataType: 'json',
-	                success: function success(res) {
-	                    localStorage.loginname = res.loginname;
-	                    localStorage.avatar_url = res.avatar_url;
-	                    localStorage.userId = res.id;
-	                    localStorage.token = self.token;
-	                    //e44d5f6d-6648-4eb8-96e3-e1bfb34f3635
-	                    var redirect = decodeURIComponent(self.$route.query.redirect || '/');
-	                    self.$route.router.go(redirect);
-	                },
-	                error: function error(res) {
-	                    var error = JSON.parse(res.responseText);
-	                    self.alert.txt = error.error_msg;
-	                    self.alert.show = true;
-	                    self.alert.hideFn();
-	                    return false;
-	                }
+	            var username = this.username;
+	            var password = this.password;
+	            console.log(">>>>>>>>>>>>>>username:" + username);
+	            this.$http.post("http://121.42.171.213:8080/api/login", { username: username, password: password }, function (data, status, request) {
+	                this.$route.router.go("/foo");
+	            }).error(function (data, status, request) {
+	                console.log(">>>>>>>>>>err" + (0, _stringify2.default)(data));
 	            });
-	        },
-	        readPic: function readPic(e) {
-	            var self = this;
-	            var file = e.currentTarget.files[0]; //  this is my image
-	            var reader = new FileReader();
-
-	            reader.onload = function (e) {
-	                var dataURL = reader.result;
-
-	                var base64 = dataURL.split('base64,');
-	                var param = { "img": base64[1] };
-
-	                self.loading.show = true;
-	                if (browser.versions.iPhone || browser.versions.iPad || browser.versions.ios) {
-	                    $.post('http://m.yueqingwang.com/common.ashx', param, function (d) {
-	                        self.loading.show = false;
-	                        if (d == "qrcode error") {
-	                            self.token = "";
-	                            var text = "二维码图片不清晰";
-	                            self.alert.txt = text;
-	                            self.alert.show = true;
-	                            self.alert.hideFn();
-	                            return false;
-	                        } else {
-	                            self.token = d;
-	                        }
-	                    });
-	                } else {
-	                    qrcode.decode(dataURL);
-	                    qrcode.callback = function (data) {
-	                        self.loading.show = false;
-	                        self.token = data;
-	                    };
-	                }
-	            };
-	            reader.readAsDataURL(file);
 	        }
-	    },
-	    components: {
-	        "nvHead": __webpack_require__(16)
 	    }
 	};
 	// </script>
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(17)
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "F:\\NodejsProject\\vue-test\\views\\topbar.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
-	  }
-	})()}
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	module.exports = "<!-- topbar starts -->\r\n<div class=\"navbar navbar-default\" role=\"navigation\">\r\n\t<div class=\"navbar-inner\">\r\n\t\t<button type=\"button\" class=\"navbar-toggle pull-left animated flip\">\r\n\t\t\t<span class=\"sr-only\">Toggle navigation</span>\r\n\t\t\t<span class=\"icon-bar\"></span>\r\n\t\t\t<span class=\"icon-bar\"></span>\r\n\t\t\t<span class=\"icon-bar\"></span>\r\n\t\t</button>\r\n\t\t<a class=\"navbar-brand\" href=\"/admin\">\r\n\t\t\t<img alt=\"Charisma Logo\" src=\"xxxHTMLLINKxxx0.300063742091879250.008706865599378943xxx\" class=\"hidden-xs\" />\r\n\t\t\t<span>云大夫</span></a>\r\n\t\t<!-- user dropdown starts -->\r\n\t\t<div class=\"btn-group pull-right\">\r\n\t\t\t<button class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\r\n\t\t\t\t<i class=\"glyphicon glyphicon-user\"></i><span class=\"hidden-sm hidden-xs\">username</span>\r\n\t\t\t\t<span class=\"caret\"></span>\r\n\t\t\t</button>\r\n\t\t\t<ul class=\"dropdown-menu\">\r\n\t\t\t\t<li><a href=\"/admin/logout\">退出</a></li>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</div>\r\n</div>\r\n<!-- topbar ends -->";
-
-/***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-	module.exports = "<nvHead></nvHead>\r\n\t<div class=\"row\">\r\n        <div class=\"col-md-12 center login-header\">\r\n            <h2>云大夫管理系统</h2>\r\n        </div>\r\n        <!--/span-->\r\n    </div><!--/row-->\r\n    <div class=\"row\">\r\n        <div class=\"well col-md-5 center login-box\">\r\n            <div class=\"alert alert-info\" id=\"warn\">请用您的用户名和密码登录</div>\r\n            <form class=\"form-horizontal\" method=\"http://121.42.171.213:8080/api/login\" method=\"post\" onsubmit=\"return false;\">\r\n                <fieldset>\r\n                    <div class=\"input-group input-group-lg\">\r\n                        <span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-user red\"></i></span>\r\n                        <input type=\"text\" id=\"username\" name=\"userName\" class=\"form-control\" placeholder=\"用户名\" value=\"\" required=\"required\">\r\n                    </div>\r\n                    <div class=\"clearfix\"></div><br>\r\n\r\n                    <div class=\"input-group input-group-lg\">\r\n                        <span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-lock red\"></i></span>\r\n                        <input type=\"password\" id=\"password\" name=\"passWord\" class=\"form-control\" placeholder=\"密码\" value=\"\"  required=\"required\">\r\n                    </div>\r\n                    <p class=\"center col-md-5\">\r\n                        <a class=\"btn btn-primary\" value=\"登陆\" @click=\"logon\">登录</a>\r\n                    </p>\r\n                </fieldset>\r\n            </form>\r\n        </div>\r\n    </div>";
+	module.exports = { "default": __webpack_require__(19), __esModule: true };
 
 /***/ },
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(20)
-	module.exports = __webpack_require__(24)
+	var core = __webpack_require__(20);
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return (core.JSON && core.JSON.stringify || JSON.stringify).apply(JSON, arguments);
+	};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '1.2.6'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"row\">\r\n        <div class=\"col-md-12 center login-header\">\r\n            <h2>云大夫管理系统</h2>\r\n        </div>\r\n        <!--/span-->\r\n    </div><!--/row-->\r\n    <div class=\"row\">\r\n        <div class=\"well col-md-5 center login-box\">\r\n            <div class=\"alert alert-info\" id=\"warn\">请用您的用户名和密码登录</div>\r\n            <form class=\"form-horizontal\" method=\"http://121.42.171.213:8080/api/login\" method=\"post\" onsubmit=\"return false;\">\r\n                <fieldset>\r\n                    <div class=\"input-group input-group-lg\">\r\n                        <span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-user red\"></i></span>\r\n                        <input type=\"text\" id=\"username\" v-model=\"username\" class=\"form-control\" placeholder=\"用户名\" value=\"\" required=\"required\">\r\n                    </div>\r\n                    <div class=\"clearfix\"></div><br>\r\n\r\n                    <div class=\"input-group input-group-lg\">\r\n                        <span class=\"input-group-addon\"><i class=\"glyphicon glyphicon-lock red\"></i></span>\r\n                        <input type=\"password\" id=\"password\" v-model=\"password\" class=\"form-control\" placeholder=\"密码\" value=\"\"  required=\"required\">\r\n                    </div>\r\n                    <p class=\"center col-md-5\">\r\n                        <a class=\"btn btn-primary\" value=\"登陆\" @click=\"logon\">登录</a>\r\n                    </p>\r\n                </fieldset>\r\n            </form>\r\n        </div>\r\n    </div>";
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(23)
+	module.exports = __webpack_require__(27)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(25)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(28)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -9760,16 +9696,16 @@
 	})()}
 
 /***/ },
-/* 20 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(21);
+	var content = __webpack_require__(24);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(23)(content, {});
+	var update = __webpack_require__(26)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -9786,10 +9722,10 @@
 	}
 
 /***/ },
-/* 21 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(22)();
+	exports = module.exports = __webpack_require__(25)();
 	// imports
 
 
@@ -9800,7 +9736,7 @@
 
 
 /***/ },
-/* 22 */
+/* 25 */
 /***/ function(module, exports) {
 
 	/*
@@ -9856,7 +9792,7 @@
 
 
 /***/ },
-/* 23 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -10110,7 +10046,7 @@
 
 
 /***/ },
-/* 24 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -10167,20 +10103,20 @@
 	// </script>
 
 /***/ },
-/* 25 */
+/* 28 */
 /***/ function(module, exports) {
 
 	module.exports = "<h3>这是一个标题组件</h3>\r\n\t<div id=\"app3\">\r\n\t  <input v-model=\"newTodo\" v-on:keyup.enter=\"addTodo\" placeholder=\"输入内容回车\">\r\n\t  <ul>\r\n\t    <li v-for=\"todo in todos\">\r\n\t      <span>{{ todo.text }}</span>\r\n\t      <button v-on:click=\"removeTodo($index)\">X</button>\r\n\t    </li>\r\n\t  </ul>\r\n\t</div>";
 
 /***/ },
-/* 26 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(27)
-	module.exports = __webpack_require__(29)
+	__webpack_require__(30)
+	module.exports = __webpack_require__(32)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(30)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(33)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -10194,16 +10130,16 @@
 	})()}
 
 /***/ },
-/* 27 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(28);
+	var content = __webpack_require__(31);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(23)(content, {});
+	var update = __webpack_require__(26)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -10220,10 +10156,10 @@
 	}
 
 /***/ },
-/* 28 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(22)();
+	exports = module.exports = __webpack_require__(25)();
 	// imports
 
 
@@ -10234,7 +10170,7 @@
 
 
 /***/ },
-/* 29 */
+/* 32 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -10293,20 +10229,20 @@
 	// </script>
 
 /***/ },
-/* 30 */
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = "<h3>获取一个列表</h3>\r\n\t<div id=\"app3\">\r\n\t  <ul>\r\n\t    <li v-for=\"todo in todos\">\r\n\t      <a v-link=\"{name:'topic',params:{id:todo.id}}\">{{ todo.title }}</a>\r\n\t    </li>\r\n\t  </ul>\r\n\t</div>";
 
 /***/ },
-/* 31 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(32)
-	module.exports = __webpack_require__(34)
+	__webpack_require__(35)
+	module.exports = __webpack_require__(37)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(35)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(38)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -10320,16 +10256,16 @@
 	})()}
 
 /***/ },
-/* 32 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(33);
+	var content = __webpack_require__(36);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(23)(content, {});
+	var update = __webpack_require__(26)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -10346,10 +10282,10 @@
 	}
 
 /***/ },
-/* 33 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(22)();
+	exports = module.exports = __webpack_require__(25)();
 	// imports
 
 
@@ -10360,7 +10296,7 @@
 
 
 /***/ },
-/* 34 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -10406,16 +10342,16 @@
 	// </script>
 
 /***/ },
-/* 35 */
+/* 38 */
 /***/ function(module, exports) {
 
 	module.exports = "<h3>topic详情</h3>\r\n\t<div>\r\n\t\t{{{ topic.content }}}\r\n\t</div>";
 
 /***/ },
-/* 36 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(37)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(40)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -10429,7 +10365,7 @@
 	})()}
 
 /***/ },
-/* 37 */
+/* 40 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"row\">\r\n        <div class=\"box col-md-12\">\r\n            <div class=\"box-inner\">\r\n                <div class=\"box-header well\" data-original-title=\"\">\r\n                    <h2><i class=\"glyphicon glyphicon-user\"></i>患者列表</h2>\r\n                    <div class=\"box-icon\">\r\n                        <a href=\"#\" class=\"btn btn-minimize btn-round btn-default\"><i\r\n                                class=\"glyphicon glyphicon-chevron-up\"></i></a>\r\n                        <a href=\"#\" class=\"btn btn-close btn-round btn-default\"><i\r\n                                class=\"glyphicon glyphicon-remove\"></i></a>\r\n                    </div>\r\n                </div>\r\n                <ul class=\"nav nav-tabs\">\r\n                    <li role=\"presentation\" class=\"active\"><a href=\"#\">今日患者</a></li>\r\n                    <li role=\"presentation\"><a href=\"#\">全部患者</a></li>\r\n                </ul>\r\n                <div class=\"box col-md-12\">\r\n                    <form class=\"form-inline\" action=\"/admin/org\" method=\"get\">\r\n                        <div class=\"form-group\">\r\n                            <select class=\"form-control\" name=\"postChoose\">\r\n                                <option value=\"1\">患者姓名</option>\r\n                                <option value=\"2\">手机号</option>\r\n                            </select>\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\r\n                            <button type=\"submit\" class=\"btn btn-default \">搜索</button>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"box col-md-12\">\r\n                    <form class=\"form-inline\" action=\"/admin/org\" method=\"get\">\r\n                        <div class=\"form-group\">\r\n                            <label for=\"exampleInputEmail2\">就诊科室:</label>\r\n                            <select class=\"form-control\" name=\"state\">\r\n                                <option value=\"\">发布状态</option>\r\n                                <option value=\"1\">已发布</option>\r\n                                <option value=\"0\">未发布</option>\r\n                                <option value=\"-1\">已删除</option>\r\n                            </select>\r\n                            <label for=\"exampleInputEmail2\">挂号类型:</label>\r\n                            <select class=\"form-control\" name=\"order\">\r\n                                <option value=\"\">选择排序</option>\r\n                                <option value=\"1\">粉丝数倒序</option>\r\n                                <option value=\"2\">粉丝数正序</option>\r\n                                <option value=\"3\">打卡数倒序</option>\r\n                                <option value=\"4\">打卡数正序</option>\r\n                            </select>\r\n                            <label for=\"exampleInputEmail2\">医生:</label>\r\n                            <select class=\"form-control\" name=\"state\">\r\n                                <option value=\"\">发布状态</option>\r\n                                <option value=\"1\">已发布</option>\r\n                                <option value=\"0\">未发布</option>\r\n                                <option value=\"-1\">已删除</option>\r\n                            </select>\r\n                            <label for=\"exampleInputEmail2\">门诊状态:</label>\r\n                            <select class=\"form-control\" name=\"order\">\r\n                                <option value=\"\">选择排序</option>\r\n                                <option value=\"1\">粉丝数倒序</option>\r\n                                <option value=\"2\">粉丝数正序</option>\r\n                                <option value=\"3\">打卡数倒序</option>\r\n                                <option value=\"4\">打卡数正序</option>\r\n                            </select>\r\n                            <label for=\"exampleInputEmail2\">会员类型:</label>\r\n                            <select class=\"form-control\" name=\"order\">\r\n                                <option value=\"\">选择排序</option>\r\n                                <option value=\"1\">粉丝数倒序</option>\r\n                                <option value=\"2\">粉丝数正序</option>\r\n                                <option value=\"3\">打卡数倒序</option>\r\n                                <option value=\"4\">打卡数正序</option>\r\n                            </select>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"box col-md-12\">\r\n                    <p>\r\n                        <a class=\"btn btn-default btn-sm\" href=\"/admin/org-add-ui\"><i class=\"glyphicon glyphicon-plus\"></i>新增</a>\r\n                    </p>\r\n                </div>\r\n                <div class=\"box-content\">\r\n                    <table class=\"table table-striped table-bordered responsive\" id=\"groupList\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>序号</th>\r\n                                <th>患者名称</th>\r\n                                <th>手机号</th>\r\n                                <th>性别</th>\r\n                                <th>年龄</th>\r\n                                <th>就诊时间</th>\r\n                                <th>就诊科室</th>\r\n                                <th>挂号类型</th>\r\n                                <th>医生</th>\r\n                                <th>门诊内容</th>\r\n                                <th>门诊状态</th>\r\n                                <th>门诊金额</th>\r\n                                <th>卡内余额</th>\r\n                                <th>会员类型</th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr>\r\n                                <td><label><input value=\"1\" type=\"checkbox\"/>1</label></td>\r\n                                <td class=\"center\">张三</td>\r\n                                <td class=\"center\">15309783647</td>\r\n                                <td class=\"center\">男</td>\r\n                                <td class=\"center\">34</td>\r\n                                <td class=\"center\">seg</td>\r\n                                <td class=\"center\">kdshg</td>\r\n                                <td class=\"center\">kdshg</td>\r\n                                <td class=\"center\">sdklhgod</td>\r\n                                <td class=\"center\">sdklhgod</td>\r\n                                <td class=\"center\">sdklhgod</td>\r\n                                <td class=\"center\">2015-12-14 12:12</td>\r\n                                <td class=\"center\">2015-12-14 12:12</td>\r\n                                <td class=\"center\">初级会员</td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                     <nav>\r\n                        <ul class=\"pager\">\r\n                        \t<li class=\"disabled\"><a href=\"#\">上一页</a></li>\r\n                        \t<li class=\"\"><a href=\"/admin/org?pageIndex=1&pageSize=10\">上一页</a></li>\r\n                            <li>第1页</li>\r\n                            <li ><a href=\"/admin/org?pageIndex=1&pageSize=10\">下一页</a></li>\r\n                            <li>共2页</li>\r\n                            <li>共19条</li>\r\n                        </ul>\r\n                    </nav>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!--/span-->\r\n    </div>";

@@ -1,8 +1,6 @@
 <template>
     <!-- 全局header -->
-    <div>
-        首页
-    </div>
+    <topbar></topbar>
 </template>
 <script>
     module.exports = {
@@ -11,6 +9,9 @@
             setTimeout(function(){
                 _self.$route.router.go({ name: 'login'});
             },2000);
+        },
+        components:{
+            "topbar":require('./topbar.vue')
         }
     }
 </script>
