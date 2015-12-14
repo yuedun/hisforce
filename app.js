@@ -29,8 +29,13 @@ var router = new VueRouter({
 // 创建的组件构造函数，也可以是一个组件选项对象。
 // 稍后我们会讲解嵌套路由
 router.map({
+	'/':{				//首页
+        name:'home',
+        component: require('./views/index.vue')
+    },
 	'/login': {
-		component: Foo,
+		name: "login",
+		component: require('./views/login.vue')
 	},
 	'/foo': {
 		component: Foo,
@@ -53,18 +58,8 @@ router.map({
 		}
 	},
 	'/doday_work': {
-		component: Foo,
 		name: "dodayWork",
-		subRoutes: {
-			"/": {
-				name: "todayPatient",
-				component: require('./views/today_work.vue')
-			},
-			"/all_patient": {
-				name: "allPatient",
-				component: require('./views/allPatient.vue')
-			}
-		}
+		component: require('./views/today_work.vue')
 	}
 });
 
