@@ -14,10 +14,10 @@
             <li role="presentation" v-bind:class="{'active': isActiveB}"><a v-on:click="allPatient(1)">全部患者</a></li>
         </ul>
         <div class="box col-md-12">
-            <form class="form-inline" action="/admin/org" method="get">
+            <form class="form-inline">
                 <div class="form-group">
                     <label for="exampleInputEmail2">患者姓名:</label>
-                    <input type="text" class="form-control" placeholder="患者姓名">
+                    <input type="text" class="form-control" placeholder="患者姓名" value="{{query.patientName}}" v-model="query.patientName">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail2">手机号:</label>
@@ -72,7 +72,7 @@
                         <option value="5">企业用户</option>
                         <option value="6">儿童用户</option>
                     </select>
-                    <button type="submit" class="btn btn-default ">搜索</button>
+                    <button type="submit" class="btn btn-default" v-on:click="allPatient">搜索</button>
                 </div>
             </form>
         </div>
@@ -116,11 +116,11 @@
             </table>
             <nav>
                 <ul class="pager">
-                    <li class=""><a @click="todayPatient(parseInt(pageIndex)-1, this.ta)">上一页</a></li>
-                    <li>第{{pageIndex}}页</li>
-                    <li ><a @click="todayPatient(parseInt(pageIndex)+1, this.ta)">下一页</a></li>
-                    <li>共{{Math.ceil(totalCount/10)}}页</li>
-                    <li>共{{totalCount}}条</li>
+                    <li class=""><a @click="todayPatient(parseInt(query.pageIndex)-1, ta)">上一页</a></li>
+                    <li>第{{query.pageIndex}}页</li>
+                    <li ><a @click="todayPatient(parseInt(query.pageIndex)+1, ta)">下一页</a></li>
+                    <li>共{{Math.ceil(query.totalCount/10)}}页</li>
+                    <li>共{{query.totalCount}}条</li>
                 </ul>
             </nav>
             <router-view></router-view>
@@ -137,11 +137,15 @@
                 show: false,
                 departments: [],
                 doctors: [],
-                totalCount: 0,
-                pageIndex: 0,
                 isActiveA:true,
                 isActiveB:false,
-                ta: "t"
+                ta: "t",
+                query:{
+                    totalCount: 0,
+                    pageIndex: 0,
+                    patientName:"",
+                    patientMobile:""
+                }
             }
         },
         route:{
@@ -155,15 +159,18 @@
         },
         methods: {
             allPatient: function(pageIdx){
-                var pageIndex = pageIdx?pageIdx:1;
-                var pageSize = 10;
+                console.log("><>"+typeof pageIdx)
+                this.query.pageIndex = (typeof pageIdx) =="number"?pageIdx:1;
+                this.query.pageSize = 10;
+                var condition = this.query;
+                condition["x-auth-token"] = localStorage.token;
+                console.log(">>>>"+JSON.stringify(this.query))
                 this.$http.get("http://121.42.171.213:8080/api/registrations/all", 
-                    {pageIndex:pageIndex, pageSize: pageSize,
-                    "x-auth-token":localStorage.token}, 
+                    condition, 
                     function (data, status, request) {
                         this.patients = data.data.rows;
-                        this.totalCount = data.data.count;
-                        this.pageIndex = data.data.pageIndex;
+                        this.query.totalCount = data.data.count;
+                        this.query.pageIndex = data.data.pageIndex;
                         this.isActiveA = false;
                         this.isActiveB = true;
                         this.ta="a"
@@ -172,20 +179,19 @@
                     });
             },
             todayPatient: function(pageIdx, str){
-                console.log(">>>>>>>>>>>"+str);
                 if(str == "a"){
                     this.allPatient(pageIdx);
                     return;
                 }
-                var pageIndex = pageIdx?pageIdx:1;
-                var pageSize = 10;
+                this.query.pageIndex = pageIdx?pageIdx:1;
+                this.query.pageSize = 10;
                 this.$http.get("http://121.42.171.213:8080/api/registrations/today", 
-                    {pageIndex:pageIndex, pageSize: pageSize,
+                    {pageIndex:this.query.pageIndex, pageSize: this.query.pageSize,
                     "x-auth-token":localStorage.token}, 
                     function (data, status, request) {
                         this.patients = data.data.rows;
-                        this.totalCount = data.data.count;
-                        this.pageIndex = data.data.pageIndex;
+                        this.query.totalCount = data.data.count;
+                        this.query.pageIndex = data.data.pageIndex;
                         this.isActiveA = true;
                         this.isActiveB = false;
                         this.ta="t";
