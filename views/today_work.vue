@@ -1,7 +1,7 @@
 <template>
     <div class="box-inner">
         <div class="box-header well" data-original-title="">
-            <h2><i class="glyphicon glyphicon-user"></i>{{pageTitle}}</h2>
+            <h2><i class="glyphicon glyphicon-user"></i>{{pageTitle || "今日工作"}}</h2>
             <div class="box-icon">
                 <a href="#" class="btn btn-minimize btn-round btn-default"><i
                         class="glyphicon glyphicon-chevron-up"></i></a>
@@ -21,19 +21,14 @@
                         <option value="2">手机号</option>
                     </select>
                     <input type="text" class="form-control" placeholder="Search">
-                    <button type="submit" class="btn btn-default ">搜索</button>
                 </div>
-            </form>
-        </div>
-        <div class="box col-md-12">
-            <form class="form-inline" action="/admin/org" method="get">
                 <div class="form-group">
                     <label for="exampleInputEmail2">就诊科室:</label>
                     <select class="form-control" name="state">
-                        <option value="">发布状态</option>
-                        <option value="1">已发布</option>
-                        <option value="0">未发布</option>
-                        <option value="-1">已删除</option>
+                        <option value="">全部</option>
+                        <template v-for="depart in departments">
+                        <option value="{{depart.id}}">{{depart.name}}</option>
+                        </template>
                     </select>
                     <label for="exampleInputEmail2">挂号类型:</label>
                     <select class="form-control" name="order">
@@ -45,10 +40,10 @@
                     </select>
                     <label for="exampleInputEmail2">医生:</label>
                     <select class="form-control" name="state">
-                        <option value="">发布状态</option>
-                        <option value="1">已发布</option>
-                        <option value="0">未发布</option>
-                        <option value="-1">已删除</option>
+                        <option value="">全部</option>
+                        <template v-for="doctor in doctors">
+                        <option value="{{doctor.id}}">{{doctor.name}}</option>
+                        </template>
                     </select>
                     <label for="exampleInputEmail2">门诊状态:</label>
                     <select class="form-control" name="order">
@@ -66,6 +61,7 @@
                         <option value="3">打卡数倒序</option>
                         <option value="4">打卡数正序</option>
                     </select>
+                    <button type="submit" class="btn btn-default ">搜索</button>
                 </div>
             </form>
         </div>
@@ -95,21 +91,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="item in patients">
                         <td><label><input value="1" type="checkbox"/>1</label></td>
-                        <td class="center">张三</td>
-                        <td class="center">15309783647</td>
-                        <td class="center">男</td>
-                        <td class="center">34</td>
-                        <td class="center">seg</td>
-                        <td class="center">kdshg</td>
-                        <td class="center">kdshg</td>
-                        <td class="center">sdklhgod</td>
-                        <td class="center">sdklhgod</td>
-                        <td class="center">sdklhgod</td>
-                        <td class="center">2015-12-14 12:12</td>
-                        <td class="center">2015-12-14 12:12</td>
-                        <td class="center">初级会员</td>
+                        <td class="center">{{item.patientName}}</td>
+                        <td class="center">{{item.patientMobile}}</td>
+                        <td class="center">{{item.gender}}</td>
+                        <td class="center">{{item.registerDate}}</td>
+                        <td class="center">{{item.departmentName}}</td>
+                        <td class="center">{{item.registrationType}}</td>
+                        <td class="center">{{item.doctorName}}</td>
+                        <td class="center">{{item.comment}}</td>
+                        <td class="center">{{item.registrationState}}</td>
+                        <td class="center">{{registrationFee}}</td>
+                        <td class="center">{{item.balance}}</td>
+                        <td class="center">{{item.memberType}}</td>
+                        <td class="center" v-show="show">{{item.memberCardNo}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -132,18 +128,49 @@
         props: ['pageTitle'],
         data: function(){
             return {
-                patients: []
+                patients: [],
+                show: false,
+                departments: [],
+                doctors: []
             }
         },
         route:{
             data:function(transition){
                 //获取url传的params参数
                 this.pageTitle = transition.to.query.pageTitle;
+                this.$http.get("http://121.42.171.213:8080/api/registrations/today", 
+                    {pageIndex:1, pageSize: 10,"x-auth-token":localStorage.token}, 
+                    function (data, status, request) {
+                        this.patients = data.data;
+                    }).error(function (data, status, request) {
+                        console.log("err:"+data+"status:"+status+"request:"+request);
+                    });
+                this.getDepartment();
+                this.getDoctor();
             }
         },
         methods: {
             allPatient: function(){
                 alert("全部患者");
+            },
+            getDepartment: function(){
+                this.$http.get("http://121.42.171.213:8080/api/dict/departments", 
+                    {"x-auth-token":localStorage.token}, 
+                    function (data, status, request) {
+                        this.departments = data.data;
+                    }).error(function (data, status, request) {
+                        console.log("err:"+data+"status:"+status+"request:"+request);
+                    });
+            },
+            getDoctor: function(){
+                this.$http.get("http://121.42.171.213:8080/api/dict/doctors", 
+                    {"x-auth-token":localStorage.token}, 
+                    function (data, status, request) {
+                    console.log("depart:"+JSON.stringify(data));
+                        this.doctors = data.data;
+                    }).error(function (data, status, request) {
+                        console.log("err:"+data+"status:"+status+"request:"+request);
+                    });
             }
         }
     }

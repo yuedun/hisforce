@@ -5,7 +5,7 @@
 <script>
     module.exports = {
         ready:function(){
-            var _self = this;
+            this.$route.router.go({name: "todayWork"});
         },
         components:{
             "leftmenu": require("./leftmenu.vue"),

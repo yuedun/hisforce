@@ -7,8 +7,8 @@
     </div><!--/row-->
     <div class="row">
         <div class="well col-md-5 center login-box">
-            <div class="alert alert-info" id="warn">请用您的用户名和密码登录</div>
-            <form class="form-horizontal" method="http://121.42.171.213:8080/api/login" method="post" onsubmit="return false;">
+            <div class="alert alert-info" id="warn">{{loginMsg}}</div>
+            <form class="form-horizontal" method="http://121.42.171.213:8080/api/login" method="post" v-on:keyup.13="logon">
                 <fieldset>
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
@@ -32,21 +32,25 @@
         data: function () {
             return {
                 username: "13671719882",
-                password: "111"
+                password: "111",
+                loginMsg: "请用您的用户名和密码登录"
             }
         },
         methods: {
             logon: function(){
                 var username = this.username;
                 var password = this.password;
+                this.loginMsg = "正在登陆……";
                 this.$http.post("http://121.42.171.213:8080/api/login", 
                     {username:username, password: password}, 
                     function (data, status, request) {
-                        this.$route.router.go({name: "index", query: {token: data.token}
+                        localStorage.token = data.data.token;
+                        this.$route.router.go({name: "index"});
+                    }).error(function (data, status, request) {
+                        if(status == 0) {
+                            this.loginMsg = "登录失败！";
+                        }
                     });
-                }).error(function (data, status, request) {
-                    console.log(">>>>>>>>>>err"+JSON.stringify(data));
-                });
             }
         }
     }
