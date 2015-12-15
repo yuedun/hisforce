@@ -18,15 +18,15 @@
 							<span>预约挂号</span>
 						</a>
 					</li>
-					<li class="accordion">
+					<li class="accordion" v-bind:class="{'active':active}" v-on:click="open(this)">
 						<a class="ajax-link">
 							<i class="glyphicon glyphicon-calendar"></i>
 							<span>门诊管理</span>
 							<span class="caret"></span>
 						</a>
-						<ul class="nav nav-pills nav-stacked">
-							<li><a  v-link="{ path: '/index/baz' }"><span>门诊中心</span></a></li>
-							<li><a href="/admin/user_exchange_list"><span>我的预约</span></a></li>
+						<ul class="nav nav-pills nav-stacked" v-bind:style="{display: display}">
+							<li><a v-link="{name:'todayWork', query:{pageTitle:'门诊中心'}}"><span>门诊中心</span></a></li>
+							<li><a v-link="{name:'todayWork', query:{pageTitle:'我的预约'}}"><span>我的预约</span></a></li>
 						</ul>
 					</li>
 					<li class="accordion">
@@ -35,12 +35,12 @@
 							<span>患者管理</span>
 							<span class="caret"></span>
 						</a>
-						<ul class="nav nav-pills nav-stacked">
-							<li><a  v-link="{ path: '/index/baz' }"><span>患者中心</span></a></li>
-							<li><a href="/admin/user_exchange_list"><span>集团用户</span></a></li>
+						<ul class="nav nav-pills nav-stacked" style="display:block;">
+							<li><a ><span>患者中心</span></a></li>
+							<li><a ><span>集团用户</span></a></li>
 						</ul>
 					</li>
-					<li class="accordion">
+					<li class="accordion" v-on:click="open">
 						<a class="ajax-link">
 							<i class="glyphicon glyphicon-eye-open"></i>
 							<span>业务管理</span>
@@ -81,3 +81,19 @@
 	</div>
 	<!-- left menu ends -->
 </template>
+<script>
+	module.exports= {
+	        data: function(){
+	            return {
+	            	active: false,
+	            	display: "none"
+	            }
+	        },
+	        methods:{
+	        	open:function(el){
+	        		this.active = true;
+	        		this.display = "block";
+	        	}
+	        }
+	    }
+</script>

@@ -21,58 +21,58 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail2">手机号:</label>
-                    <input type="text" class="form-control" placeholder="手机号">
+                    <input type="text" class="form-control" placeholder="手机号" value="{{query.patientMobile}}" v-model="query.patientMobile">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail2">就诊科室:</label>
-                    <select class="form-control" name="state">
+                    <select class="form-control" v-model="query.departmentId">
                         <option value="">全部</option>
                         <template v-for="depart in departments">
                         <option value="{{depart.id}}">{{depart.name}}</option>
                         </template>
                     </select>
                     <label for="exampleInputEmail2">挂号类型:</label>
-                    <select class="form-control" name="order">
+                    <select class="form-control" v-model="query.registrationType">
                         <option value="">全部</option>
-                        <option value="1">线上预约</option>
-                        <option value="2">线下预约</option>
-                        <option value="3">到院支付</option>
-                        <option value="4">销售代约</option>
-                        <option value="5">线下加号</option>
-                        <option value="6">销售加号</option>
-                        <option value="7">现场挂号</option>
-                        <option value="8">网上挂号</option>
+                        <option value="线上预约">线上预约</option>
+                        <option value="线下预约">线下预约</option>
+                        <option value="到院支付">到院支付</option>
+                        <option value="销售代约">销售代约</option>
+                        <option value="线下加号">线下加号</option>
+                        <option value="销售加号">销售加号</option>
+                        <option value="现场挂号">现场挂号</option>
+                        <option value="网上挂号">网上挂号</option>
                     </select>
                     <label for="exampleInputEmail2">医生:</label>
-                    <select class="form-control" name="state">
+                    <select class="form-control" v-model="query.doctorId">
                         <option value="">全部</option>
                         <template v-for="doctor in doctors">
                         <option value="{{doctor.id}}">{{doctor.name}}</option>
                         </template>
                     </select>
                     <label for="exampleInputEmail2">门诊状态:</label>
-                    <select class="form-control" name="order">
+                    <select class="form-control" v-model="query.status">
                         <option value="">全部</option>
-                        <option value="1">初诊</option>
-                        <option value="2">复诊</option>
-                        <option value="3">院内转诊</option>
-                        <option value="4">跨院转诊</option>
-                        <option value="5">远程会诊</option>
-                        <option value="6">远程初诊</option>
-                        <option value="7">远程复诊</option>
+                        <option value="初诊">初诊</option>
+                        <option value="复诊">复诊</option>
+                        <option value="院内转诊">院内转诊</option>
+                        <option value="跨院转诊">跨院转诊</option>
+                        <option value="远程会诊">远程会诊</option>
+                        <option value="远程初诊">远程初诊</option>
+                        <option value="远程复诊">远程复诊</option>
                     </select>
                     </select>
                     <label for="exampleInputEmail2">会员类型:</label>
-                    <select class="form-control" name="order">
+                    <select class="form-control" v-model="query.memberType">
                         <option value="">全部</option>
-                        <option value="1">初级用户</option>
-                        <option value="2">银卡用户</option>
+                        <option value="初级用户">初级用户</option>
+                        <option value="银卡用户">银卡用户</option>
                         <option value="3">金卡用户</option>
-                        <option value="4">学校用户</option>
-                        <option value="5">企业用户</option>
-                        <option value="6">儿童用户</option>
+                        <option value="金卡用户">学校用户</option>
+                        <option value="企业用户">企业用户</option>
+                        <option value="儿童用户">儿童用户</option>
                     </select>
-                    <button type="submit" class="btn btn-default" v-on:click="allPatient">搜索</button>
+                    <button type="submit" class="btn btn-default" v-on:click="todayPatient(1, ta)">搜索</button>
                 </div>
             </form>
         </div>
@@ -144,7 +144,12 @@
                     totalCount: 0,
                     pageIndex: 0,
                     patientName:"",
-                    patientMobile:""
+                    patientMobile:"",
+                    departmentId:"",
+                    registrationType:"",
+                    doctorId:"",
+                    status:"",
+                    memberType:""
                 }
             }
         },
@@ -159,7 +164,6 @@
         },
         methods: {
             allPatient: function(pageIdx){
-                console.log("><>"+typeof pageIdx)
                 this.query.pageIndex = (typeof pageIdx) =="number"?pageIdx:1;
                 this.query.pageSize = 10;
                 var condition = this.query;
@@ -183,11 +187,13 @@
                     this.allPatient(pageIdx);
                     return;
                 }
-                this.query.pageIndex = pageIdx?pageIdx:1;
+                this.query.pageIndex = (typeof pageIdx) =="number"?pageIdx:1;
                 this.query.pageSize = 10;
+                var condition = this.query;
+                condition["x-auth-token"] = localStorage.token;
+                console.log(">>>>"+JSON.stringify(this.query))
                 this.$http.get("http://121.42.171.213:8080/api/registrations/today", 
-                    {pageIndex:this.query.pageIndex, pageSize: this.query.pageSize,
-                    "x-auth-token":localStorage.token}, 
+                    condition, 
                     function (data, status, request) {
                         this.patients = data.data.rows;
                         this.query.totalCount = data.data.count;
