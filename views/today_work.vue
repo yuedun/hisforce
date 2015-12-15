@@ -107,22 +107,23 @@
                         <td class="center">{{item.doctorName}}</td>
                         <td class="center">{{item.comment}}</td>
                         <td class="center">{{item.status}}</td>
-                        <td class="center">{{registrationFee}}</td>
+                        <td class="center">{{item.registrationFee}}</td>
                         <td class="center">{{item.balance}}</td>
                         <td class="center">{{item.memberType}}</td>
                         <td class="center" v-show="show">{{item.memberCardNo}}</td>
                     </tr>
                 </tbody>
             </table>
-             <nav>
+            <nav>
                 <ul class="pager">
-                    <li class=""><a @click="todayPatient(parseInt(pageIndex)-1)">上一页</a></li>
+                    <li class=""><a @click="todayPatient(parseInt(pageIndex)-1, this.ta)">上一页</a></li>
                     <li>第{{pageIndex}}页</li>
-                    <li ><a @click="todayPatient(parseInt(pageIndex)+1)">下一页</a></li>
+                    <li ><a @click="todayPatient(parseInt(pageIndex)+1, this.ta)">下一页</a></li>
                     <li>共{{Math.ceil(totalCount/10)}}页</li>
                     <li>共{{totalCount}}条</li>
                 </ul>
             </nav>
+            <router-view></router-view>
         </div>
     </div>
 </template>
@@ -139,7 +140,8 @@
                 totalCount: 0,
                 pageIndex: 0,
                 isActiveA:true,
-                isActiveB:false
+                isActiveB:false,
+                ta: "t"
             }
         },
         route:{
@@ -164,11 +166,17 @@
                         this.pageIndex = data.data.pageIndex;
                         this.isActiveA = false;
                         this.isActiveB = true;
+                        this.ta="a"
                     }).error(function (data, status, request) {
                         console.log("err:"+data+"status:"+status+"request:"+request);
                     });
             },
             todayPatient: function(pageIdx, str){
+                console.log(">>>>>>>>>>>"+str);
+                if(str == "a"){
+                    this.allPatient(pageIdx);
+                    return;
+                }
                 var pageIndex = pageIdx?pageIdx:1;
                 var pageSize = 10;
                 this.$http.get("http://121.42.171.213:8080/api/registrations/today", 
@@ -180,6 +188,7 @@
                         this.pageIndex = data.data.pageIndex;
                         this.isActiveA = true;
                         this.isActiveB = false;
+                        this.ta="t";
                     }).error(function (data, status, request) {
                         console.log("err:"+data+"status:"+status+"request:"+request);
                     });
