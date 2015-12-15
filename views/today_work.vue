@@ -10,17 +10,18 @@
             </div>
         </div>
         <ul class="nav nav-tabs">
-            <li role="presentation" class="active"><a href="#">今日患者</a></li>
-            <li role="presentation"><a v-on:click="allPatient">全部患者</a></li>
+            <li role="presentation" v-bind:class="{'active': isActiveA}"><a v-on:click="todayPatient(1)">今日患者</a></li>
+            <li role="presentation" v-bind:class="{'active': isActiveB}"><a v-on:click="allPatient(1)">全部患者</a></li>
         </ul>
         <div class="box col-md-12">
             <form class="form-inline" action="/admin/org" method="get">
                 <div class="form-group">
-                    <select class="form-control" name="postChoose">
-                        <option value="1">患者姓名</option>
-                        <option value="2">手机号</option>
-                    </select>
-                    <input type="text" class="form-control" placeholder="Search">
+                    <label for="exampleInputEmail2">患者姓名:</label>
+                    <input type="text" class="form-control" placeholder="患者姓名">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail2">手机号:</label>
+                    <input type="text" class="form-control" placeholder="手机号">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail2">就诊科室:</label>
@@ -32,11 +33,15 @@
                     </select>
                     <label for="exampleInputEmail2">挂号类型:</label>
                     <select class="form-control" name="order">
-                        <option value="">选择排序</option>
-                        <option value="1">粉丝数倒序</option>
-                        <option value="2">粉丝数正序</option>
-                        <option value="3">打卡数倒序</option>
-                        <option value="4">打卡数正序</option>
+                        <option value="">全部</option>
+                        <option value="1">线上预约</option>
+                        <option value="2">线下预约</option>
+                        <option value="3">到院支付</option>
+                        <option value="4">销售代约</option>
+                        <option value="5">线下加号</option>
+                        <option value="6">销售加号</option>
+                        <option value="7">现场挂号</option>
+                        <option value="8">网上挂号</option>
                     </select>
                     <label for="exampleInputEmail2">医生:</label>
                     <select class="form-control" name="state">
@@ -47,28 +52,29 @@
                     </select>
                     <label for="exampleInputEmail2">门诊状态:</label>
                     <select class="form-control" name="order">
-                        <option value="">选择排序</option>
-                        <option value="1">粉丝数倒序</option>
-                        <option value="2">粉丝数正序</option>
-                        <option value="3">打卡数倒序</option>
-                        <option value="4">打卡数正序</option>
+                        <option value="">全部</option>
+                        <option value="1">初诊</option>
+                        <option value="2">复诊</option>
+                        <option value="3">院内转诊</option>
+                        <option value="4">跨院转诊</option>
+                        <option value="5">远程会诊</option>
+                        <option value="6">远程初诊</option>
+                        <option value="7">远程复诊</option>
+                    </select>
                     </select>
                     <label for="exampleInputEmail2">会员类型:</label>
                     <select class="form-control" name="order">
-                        <option value="">选择排序</option>
-                        <option value="1">粉丝数倒序</option>
-                        <option value="2">粉丝数正序</option>
-                        <option value="3">打卡数倒序</option>
-                        <option value="4">打卡数正序</option>
+                        <option value="">全部</option>
+                        <option value="1">初级用户</option>
+                        <option value="2">银卡用户</option>
+                        <option value="3">金卡用户</option>
+                        <option value="4">学校用户</option>
+                        <option value="5">企业用户</option>
+                        <option value="6">儿童用户</option>
                     </select>
                     <button type="submit" class="btn btn-default ">搜索</button>
                 </div>
             </form>
-        </div>
-        <div class="box col-md-12">
-            <p>
-                <a class="btn btn-default btn-sm" href="/admin/org-add-ui"><i class="glyphicon glyphicon-plus"></i>新增</a>
-            </p>
         </div>
         <div class="box-content">
             <table class="table table-striped table-bordered responsive" id="groupList">
@@ -78,7 +84,6 @@
                         <th>患者名称</th>
                         <th>手机号</th>
                         <th>性别</th>
-                        <th>年龄</th>
                         <th>就诊时间</th>
                         <th>就诊科室</th>
                         <th>挂号类型</th>
@@ -92,7 +97,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="item in patients">
-                        <td><label><input value="1" type="checkbox"/>1</label></td>
+                        <td class="center">{{$index+1}}</td>
                         <td class="center">{{item.patientName}}</td>
                         <td class="center">{{item.patientMobile}}</td>
                         <td class="center">{{item.gender}}</td>
@@ -101,7 +106,7 @@
                         <td class="center">{{item.registrationType}}</td>
                         <td class="center">{{item.doctorName}}</td>
                         <td class="center">{{item.comment}}</td>
-                        <td class="center">{{item.registrationState}}</td>
+                        <td class="center">{{item.status}}</td>
                         <td class="center">{{registrationFee}}</td>
                         <td class="center">{{item.balance}}</td>
                         <td class="center">{{item.memberType}}</td>
@@ -111,12 +116,11 @@
             </table>
              <nav>
                 <ul class="pager">
-                    <li class="disabled"><a href="#">上一页</a></li>
-                    <li class=""><a href="/admin/org?pageIndex=1&pageSize=10">上一页</a></li>
-                    <li>第1页</li>
-                    <li ><a href="/admin/org?pageIndex=1&pageSize=10">下一页</a></li>
-                    <li>共2页</li>
-                    <li>共19条</li>
+                    <li class=""><a @click="todayPatient(parseInt(pageIndex)-1)">上一页</a></li>
+                    <li>第{{pageIndex}}页</li>
+                    <li ><a @click="todayPatient(parseInt(pageIndex)+1)">下一页</a></li>
+                    <li>共{{Math.ceil(totalCount/10)}}页</li>
+                    <li>共{{totalCount}}条</li>
                 </ul>
             </nav>
         </div>
@@ -131,27 +135,54 @@
                 patients: [],
                 show: false,
                 departments: [],
-                doctors: []
+                doctors: [],
+                totalCount: 0,
+                pageIndex: 0,
+                isActiveA:true,
+                isActiveB:false
             }
         },
         route:{
             data:function(transition){
                 //获取url传的params参数
                 this.pageTitle = transition.to.query.pageTitle;
-                this.$http.get("http://121.42.171.213:8080/api/registrations/today", 
-                    {pageIndex:1, pageSize: 10,"x-auth-token":localStorage.token}, 
-                    function (data, status, request) {
-                        this.patients = data.data;
-                    }).error(function (data, status, request) {
-                        console.log("err:"+data+"status:"+status+"request:"+request);
-                    });
+                this.todayPatient();
                 this.getDepartment();
                 this.getDoctor();
             }
         },
         methods: {
-            allPatient: function(){
-                alert("全部患者");
+            allPatient: function(pageIdx){
+                var pageIndex = pageIdx?pageIdx:1;
+                var pageSize = 10;
+                this.$http.get("http://121.42.171.213:8080/api/registrations/all", 
+                    {pageIndex:pageIndex, pageSize: pageSize,
+                    "x-auth-token":localStorage.token}, 
+                    function (data, status, request) {
+                        this.patients = data.data.rows;
+                        this.totalCount = data.data.count;
+                        this.pageIndex = data.data.pageIndex;
+                        this.isActiveA = false;
+                        this.isActiveB = true;
+                    }).error(function (data, status, request) {
+                        console.log("err:"+data+"status:"+status+"request:"+request);
+                    });
+            },
+            todayPatient: function(pageIdx, str){
+                var pageIndex = pageIdx?pageIdx:1;
+                var pageSize = 10;
+                this.$http.get("http://121.42.171.213:8080/api/registrations/today", 
+                    {pageIndex:pageIndex, pageSize: pageSize,
+                    "x-auth-token":localStorage.token}, 
+                    function (data, status, request) {
+                        this.patients = data.data.rows;
+                        this.totalCount = data.data.count;
+                        this.pageIndex = data.data.pageIndex;
+                        this.isActiveA = true;
+                        this.isActiveB = false;
+                    }).error(function (data, status, request) {
+                        console.log("err:"+data+"status:"+status+"request:"+request);
+                    });
             },
             getDepartment: function(){
                 this.$http.get("http://121.42.171.213:8080/api/dict/departments", 
@@ -166,7 +197,6 @@
                 this.$http.get("http://121.42.171.213:8080/api/dict/doctors", 
                     {"x-auth-token":localStorage.token}, 
                     function (data, status, request) {
-                    console.log("depart:"+JSON.stringify(data));
                         this.doctors = data.data;
                     }).error(function (data, status, request) {
                         console.log("err:"+data+"status:"+status+"request:"+request);
