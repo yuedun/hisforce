@@ -49,6 +49,7 @@
 	Vue.use(VueRouter);
 	var VueResource = __webpack_require__(14);
 	Vue.use(VueResource);
+	Vue.config.debug = true;//调试模式
 	// 定义组件
 	var Foo = Vue.extend({
 		template: '<div class="foo">' + 
@@ -10654,21 +10655,23 @@
 
 	//                         <option value="">全部</option>
 
-	//                         <option value="线上预约">线上预约</option>
+	//                         <option value="0">线上预约</option>
 
-	//                         <option value="线下预约">线下预约</option>
+	//                         <option value="1">线下预约</option>
 
-	//                         <option value="到院支付">到院支付</option>
+	//                         <option value="2">现场挂号</option>
 
-	//                         <option value="销售代约">销售代约</option>
+	//                         <option value="3">复诊预约</option>
 
-	//                         <option value="线下加号">线下加号</option>
+	//                         <option value="4">转诊挂号</option>
 
-	//                         <option value="销售加号">销售加号</option>
+	//                         <option value="5">现场加号</option>
 
-	//                         <option value="现场挂号">现场挂号</option>
+	//                         <option value="6">线上加号</option>
 
-	//                         <option value="网上挂号">网上挂号</option>
+	//                         <option value="7">销售代约</option>
+
+	//                         <option value="8">销售加号</option>
 
 	//                     </select>
 
@@ -10692,19 +10695,19 @@
 
 	//                         <option value="">全部</option>
 
-	//                         <option value="初诊">初诊</option>
+	//                         <option value="0">初诊</option>
 
-	//                         <option value="复诊">复诊</option>
+	//                         <option value="1">复诊</option>
 
-	//                         <option value="院内转诊">院内转诊</option>
+	//                         <option value="2">院内转诊</option>
 
-	//                         <option value="跨院转诊">跨院转诊</option>
+	//                         <option value="3">跨院转诊</option>
 
-	//                         <option value="远程会诊">远程会诊</option>
+	//                         <option value="4">远程会诊</option>
 
-	//                         <option value="远程初诊">远程初诊</option>
+	//                         <option value="5">远程初诊</option>
 
-	//                         <option value="远程复诊">远程复诊</option>
+	//                         <option value="6">远程复诊</option>
 
 	//                     </select>
 
@@ -10716,17 +10719,17 @@
 
 	//                         <option value="">全部</option>
 
-	//                         <option value="初级用户">初级用户</option>
+	//                         <option value="0">初级用户</option>
 
-	//                         <option value="银卡用户">银卡用户</option>
+	//                         <option value="1">银卡用户</option>
 
-	//                         <option value="3">金卡用户</option>
+	//                         <option value="2">金卡用户</option>
 
-	//                         <option value="金卡用户">学校用户</option>
+	//                         <option value="3">学校用户</option>
 
-	//                         <option value="企业用户">企业用户</option>
+	//                         <option value="4">企业用户</option>
 
-	//                         <option value="儿童用户">儿童用户</option>
+	//                         <option value="5">儿童用户</option>
 
 	//                     </select>
 
@@ -10882,7 +10885,7 @@
 	            var condition = this.query;
 	            condition["x-auth-token"] = localStorage.token;
 	            console.log(">>>>" + (0, _stringify2.default)(this.query));
-	            this.$http.get("http://121.42.171.213:8080/api/registrations/all", condition, { "x-auth-token": localStorage.token }, function (data, status, request) {
+	            this.$http.get("http://121.42.171.213:8080/api/registrations/all", condition, function (data, status, request) {
 	                this.patients = data.data.rows;
 	                this.query.totalCount = data.data.count;
 	                this.query.pageIndex = data.data.pageIndex;
@@ -10903,7 +10906,7 @@
 	            var condition = this.query;
 	            condition["x-auth-token"] = localStorage.token;
 	            console.log(">>>>" + (0, _stringify2.default)(this.query));
-	            this.$http.get("http://121.42.171.213:8080/api/registrations/today", condition, { "x-auth-token": localStorage.token }, function (data, status, request) {
+	            this.$http.get("http://121.42.171.213:8080/api/registrations/today", condition, function (data, status, request) {
 	                this.patients = data.data.rows;
 	                this.query.totalCount = data.data.count;
 	                this.query.pageIndex = data.data.pageIndex;
@@ -10922,6 +10925,7 @@
 	            });
 	        },
 	        getDoctor: function getDoctor() {
+	            //121.42.171.213
 	            this.$http.get("http://121.42.171.213:8080/api/dict/doctors", { "x-auth-token": localStorage.token }, function (data, status, request) {
 	                this.doctors = data.data;
 	            }).error(function (data, status, request) {
@@ -10958,7 +10962,7 @@
 /* 48 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"box-inner\">\r\n        <div class=\"box-header well\" data-original-title=\"\">\r\n            <h2><i class=\"glyphicon glyphicon-user\"></i>{{pageTitle || \"今日工作\"}}</h2>\r\n            <div class=\"box-icon\">\r\n                <a href=\"#\" class=\"btn btn-minimize btn-round btn-default\"><i\r\n                        class=\"glyphicon glyphicon-chevron-up\"></i></a>\r\n                <a href=\"#\" class=\"btn btn-close btn-round btn-default\"><i\r\n                        class=\"glyphicon glyphicon-remove\"></i></a>\r\n            </div>\r\n        </div>\r\n        <ul class=\"nav nav-tabs\">\r\n            <li role=\"presentation\" v-bind:class=\"{'active': isActiveA}\"><a v-on:click=\"todayPatient(1)\">今日患者</a></li>\r\n            <li role=\"presentation\" v-bind:class=\"{'active': isActiveB}\"><a v-on:click=\"allPatient(1)\">全部患者</a></li>\r\n        </ul>\r\n        <div class=\"box col-md-12\">\r\n            <form class=\"form-inline\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">患者姓名:</label>\r\n                    <input type=\"text\" class=\"form-control\" placeholder=\"患者姓名\" value=\"{{query.patientName}}\" v-model=\"query.patientName\">\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">手机号:</label>\r\n                    <input type=\"text\" class=\"form-control\" placeholder=\"手机号\" value=\"{{query.patientMobile}}\" v-model=\"query.patientMobile\">\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">就诊科室:</label>\r\n                    <select class=\"form-control\" v-model=\"query.departmentId\">\r\n                        <option value=\"\">全部</option>\r\n                        <template v-for=\"depart in departments\">\r\n                        <option value=\"{{depart.id}}\">{{depart.name}}</option>\r\n                        </template>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">挂号类型:</label>\r\n                    <select class=\"form-control\" v-model=\"query.registrationType\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"线上预约\">线上预约</option>\r\n                        <option value=\"线下预约\">线下预约</option>\r\n                        <option value=\"到院支付\">到院支付</option>\r\n                        <option value=\"销售代约\">销售代约</option>\r\n                        <option value=\"线下加号\">线下加号</option>\r\n                        <option value=\"销售加号\">销售加号</option>\r\n                        <option value=\"现场挂号\">现场挂号</option>\r\n                        <option value=\"网上挂号\">网上挂号</option>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">医生:</label>\r\n                    <select class=\"form-control\" v-model=\"query.doctorId\">\r\n                        <option value=\"\">全部</option>\r\n                        <template v-for=\"doctor in doctors\">\r\n                        <option value=\"{{doctor.id}}\">{{doctor.name}}</option>\r\n                        </template>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">门诊状态:</label>\r\n                    <select class=\"form-control\" v-model=\"query.status\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"初诊\">初诊</option>\r\n                        <option value=\"复诊\">复诊</option>\r\n                        <option value=\"院内转诊\">院内转诊</option>\r\n                        <option value=\"跨院转诊\">跨院转诊</option>\r\n                        <option value=\"远程会诊\">远程会诊</option>\r\n                        <option value=\"远程初诊\">远程初诊</option>\r\n                        <option value=\"远程复诊\">远程复诊</option>\r\n                    </select>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">会员类型:</label>\r\n                    <select class=\"form-control\" v-model=\"query.memberType\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"初级用户\">初级用户</option>\r\n                        <option value=\"银卡用户\">银卡用户</option>\r\n                        <option value=\"3\">金卡用户</option>\r\n                        <option value=\"金卡用户\">学校用户</option>\r\n                        <option value=\"企业用户\">企业用户</option>\r\n                        <option value=\"儿童用户\">儿童用户</option>\r\n                    </select>\r\n                    <button type=\"submit\" class=\"btn btn-default\" v-on:click=\"todayPatient(1, ta)\">搜索</button>\r\n                </div>\r\n            </form>\r\n        </div>\r\n        <div class=\"box-content\">\r\n            <table class=\"table table-striped table-bordered responsive\" id=\"groupList\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>序号</th>\r\n                        <th>患者名称</th>\r\n                        <th>手机号</th>\r\n                        <th>性别</th>\r\n                        <th>就诊时间</th>\r\n                        <th>就诊科室</th>\r\n                        <th>挂号类型</th>\r\n                        <th>医生</th>\r\n                        <th>门诊内容</th>\r\n                        <th>门诊状态</th>\r\n                        <th>门诊金额</th>\r\n                        <th>卡内余额</th>\r\n                        <th>会员类型</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr v-for=\"item in patients\">\r\n                        <td class=\"center\">{{$index+1}}</td>\r\n                        <td class=\"center\">{{item.patientName}}</td>\r\n                        <td class=\"center\">{{item.patientMobile}}</td>\r\n                        <td class=\"center\">{{item.gender}}</td>\r\n                        <td class=\"center\">{{item.registerDate}}</td>\r\n                        <td class=\"center\">{{item.departmentName}}</td>\r\n                        <td class=\"center\">{{item.registrationType}}</td>\r\n                        <td class=\"center\">{{item.doctorName}}</td>\r\n                        <td class=\"center\">{{item.comment}}</td>\r\n                        <td class=\"center\">{{item.status}}</td>\r\n                        <td class=\"center\">{{item.registrationFee}}</td>\r\n                        <td class=\"center\">{{item.balance}}</td>\r\n                        <td class=\"center\">{{item.memberType}}</td>\r\n                        <td class=\"center\" v-show=\"show\">{{item.memberCardNo}}</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n            <nav>\r\n                <ul class=\"pager\">\r\n                    <li class=\"\"><a @click=\"todayPatient(parseInt(query.pageIndex)-1, ta)\">上一页</a></li>\r\n                    <li>第{{query.pageIndex}}页</li>\r\n                    <li ><a @click=\"todayPatient(parseInt(query.pageIndex)+1, ta)\">下一页</a></li>\r\n                    <li>共{{Math.ceil(query.totalCount/10)}}页</li>\r\n                    <li>共{{query.totalCount}}条</li>\r\n                </ul>\r\n            </nav>\r\n            <router-view></router-view>\r\n        </div>\r\n    </div>";
+	module.exports = "<div class=\"box-inner\">\r\n        <div class=\"box-header well\" data-original-title=\"\">\r\n            <h2><i class=\"glyphicon glyphicon-user\"></i>{{pageTitle || \"今日工作\"}}</h2>\r\n            <div class=\"box-icon\">\r\n                <a href=\"#\" class=\"btn btn-minimize btn-round btn-default\"><i\r\n                        class=\"glyphicon glyphicon-chevron-up\"></i></a>\r\n                <a href=\"#\" class=\"btn btn-close btn-round btn-default\"><i\r\n                        class=\"glyphicon glyphicon-remove\"></i></a>\r\n            </div>\r\n        </div>\r\n        <ul class=\"nav nav-tabs\">\r\n            <li role=\"presentation\" v-bind:class=\"{'active': isActiveA}\"><a v-on:click=\"todayPatient(1)\">今日患者</a></li>\r\n            <li role=\"presentation\" v-bind:class=\"{'active': isActiveB}\"><a v-on:click=\"allPatient(1)\">全部患者</a></li>\r\n        </ul>\r\n        <div class=\"box col-md-12\">\r\n            <form class=\"form-inline\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">患者姓名:</label>\r\n                    <input type=\"text\" class=\"form-control\" placeholder=\"患者姓名\" value=\"{{query.patientName}}\" v-model=\"query.patientName\">\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">手机号:</label>\r\n                    <input type=\"text\" class=\"form-control\" placeholder=\"手机号\" value=\"{{query.patientMobile}}\" v-model=\"query.patientMobile\">\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">就诊科室:</label>\r\n                    <select class=\"form-control\" v-model=\"query.departmentId\">\r\n                        <option value=\"\">全部</option>\r\n                        <template v-for=\"depart in departments\">\r\n                        <option value=\"{{depart.id}}\">{{depart.name}}</option>\r\n                        </template>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">挂号类型:</label>\r\n                    <select class=\"form-control\" v-model=\"query.registrationType\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"0\">线上预约</option>\r\n                        <option value=\"1\">线下预约</option>\r\n                        <option value=\"2\">现场挂号</option>\r\n                        <option value=\"3\">复诊预约</option>\r\n                        <option value=\"4\">转诊挂号</option>\r\n                        <option value=\"5\">现场加号</option>\r\n                        <option value=\"6\">线上加号</option>\r\n                        <option value=\"7\">销售代约</option>\r\n                        <option value=\"8\">销售加号</option>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">医生:</label>\r\n                    <select class=\"form-control\" v-model=\"query.doctorId\">\r\n                        <option value=\"\">全部</option>\r\n                        <template v-for=\"doctor in doctors\">\r\n                        <option value=\"{{doctor.id}}\">{{doctor.name}}</option>\r\n                        </template>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">门诊状态:</label>\r\n                    <select class=\"form-control\" v-model=\"query.status\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"0\">初诊</option>\r\n                        <option value=\"1\">复诊</option>\r\n                        <option value=\"2\">院内转诊</option>\r\n                        <option value=\"3\">跨院转诊</option>\r\n                        <option value=\"4\">远程会诊</option>\r\n                        <option value=\"5\">远程初诊</option>\r\n                        <option value=\"6\">远程复诊</option>\r\n                    </select>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">会员类型:</label>\r\n                    <select class=\"form-control\" v-model=\"query.memberType\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"0\">初级用户</option>\r\n                        <option value=\"1\">银卡用户</option>\r\n                        <option value=\"2\">金卡用户</option>\r\n                        <option value=\"3\">学校用户</option>\r\n                        <option value=\"4\">企业用户</option>\r\n                        <option value=\"5\">儿童用户</option>\r\n                    </select>\r\n                    <button type=\"submit\" class=\"btn btn-default\" v-on:click=\"todayPatient(1, ta)\">搜索</button>\r\n                </div>\r\n            </form>\r\n        </div>\r\n        <div class=\"box-content\">\r\n            <table class=\"table table-striped table-bordered responsive\" id=\"groupList\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>序号</th>\r\n                        <th>患者名称</th>\r\n                        <th>手机号</th>\r\n                        <th>性别</th>\r\n                        <th>就诊时间</th>\r\n                        <th>就诊科室</th>\r\n                        <th>挂号类型</th>\r\n                        <th>医生</th>\r\n                        <th>门诊内容</th>\r\n                        <th>门诊状态</th>\r\n                        <th>门诊金额</th>\r\n                        <th>卡内余额</th>\r\n                        <th>会员类型</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr v-for=\"item in patients\">\r\n                        <td class=\"center\">{{$index+1}}</td>\r\n                        <td class=\"center\">{{item.patientName}}</td>\r\n                        <td class=\"center\">{{item.patientMobile}}</td>\r\n                        <td class=\"center\">{{item.gender}}</td>\r\n                        <td class=\"center\">{{item.registerDate}}</td>\r\n                        <td class=\"center\">{{item.departmentName}}</td>\r\n                        <td class=\"center\">{{item.registrationType}}</td>\r\n                        <td class=\"center\">{{item.doctorName}}</td>\r\n                        <td class=\"center\">{{item.comment}}</td>\r\n                        <td class=\"center\">{{item.status}}</td>\r\n                        <td class=\"center\">{{item.registrationFee}}</td>\r\n                        <td class=\"center\">{{item.balance}}</td>\r\n                        <td class=\"center\">{{item.memberType}}</td>\r\n                        <td class=\"center\" v-show=\"show\">{{item.memberCardNo}}</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n            <nav>\r\n                <ul class=\"pager\">\r\n                    <li class=\"\"><a @click=\"todayPatient(parseInt(query.pageIndex)-1, ta)\">上一页</a></li>\r\n                    <li>第{{query.pageIndex}}页</li>\r\n                    <li ><a @click=\"todayPatient(parseInt(query.pageIndex)+1, ta)\">下一页</a></li>\r\n                    <li>共{{Math.ceil(query.totalCount/10)}}页</li>\r\n                    <li>共{{query.totalCount}}条</li>\r\n                </ul>\r\n            </nav>\r\n            <router-view></router-view>\r\n        </div>\r\n    </div>";
 
 /***/ },
 /* 49 */
@@ -11056,21 +11060,23 @@
 
 	//                         <option value="">全部</option>
 
-	//                         <option value="线上预约">线上预约</option>
+	//                         <option value="0">线上预约</option>
 
-	//                         <option value="线下预约">线下预约</option>
+	//                         <option value="1">线下预约</option>
 
-	//                         <option value="到院支付">到院支付</option>
+	//                         <option value="2">现场挂号</option>
 
-	//                         <option value="销售代约">销售代约</option>
+	//                         <option value="3">复诊预约</option>
 
-	//                         <option value="线下加号">线下加号</option>
+	//                         <option value="4">转诊挂号</option>
 
-	//                         <option value="销售加号">销售加号</option>
+	//                         <option value="5">现场加号</option>
 
-	//                         <option value="现场挂号">现场挂号</option>
+	//                         <option value="6">线上加号</option>
 
-	//                         <option value="网上挂号">网上挂号</option>
+	//                         <option value="7">销售代约</option>
+
+	//                         <option value="8">销售加号</option>
 
 	//                     </select>
 
@@ -11094,19 +11100,19 @@
 
 	//                         <option value="">全部</option>
 
-	//                         <option value="初诊">初诊</option>
+	//                         <option value="0">初诊</option>
 
-	//                         <option value="复诊">复诊</option>
+	//                         <option value="1">复诊</option>
 
-	//                         <option value="院内转诊">院内转诊</option>
+	//                         <option value="2">院内转诊</option>
 
-	//                         <option value="跨院转诊">跨院转诊</option>
+	//                         <option value="3">跨院转诊</option>
 
-	//                         <option value="远程会诊">远程会诊</option>
+	//                         <option value="4">远程会诊</option>
 
-	//                         <option value="远程初诊">远程初诊</option>
+	//                         <option value="5">远程初诊</option>
 
-	//                         <option value="远程复诊">远程复诊</option>
+	//                         <option value="6">远程复诊</option>
 
 	//                     </select>
 
@@ -11118,17 +11124,17 @@
 
 	//                         <option value="">全部</option>
 
-	//                         <option value="初级用户">初级用户</option>
+	//                         <option value="0">初级用户</option>
 
-	//                         <option value="银卡用户">银卡用户</option>
+	//                         <option value="1">银卡用户</option>
 
-	//                         <option value="3">金卡用户</option>
+	//                         <option value="2">金卡用户</option>
 
-	//                         <option value="金卡用户">学校用户</option>
+	//                         <option value="3">学校用户</option>
 
-	//                         <option value="企业用户">企业用户</option>
+	//                         <option value="4">企业用户</option>
 
-	//                         <option value="儿童用户">儿童用户</option>
+	//                         <option value="5">儿童用户</option>
 
 	//                     </select>
 
@@ -11144,11 +11150,11 @@
 
 	//             <p>
 
-	//                 <a class="btn btn-default btn-sm" href="">
+	//                 <button class="btn btn-default btn-sm" v-on:click="showModal('mymodal1')">
 
 	//                     <i class="glyphicon glyphicon-plus"></i>新增
 
-	//                 </a>
+	//                 </button>
 
 	//             </p>
 
@@ -11228,7 +11234,23 @@
 
 	//                         <td class="center">{{item.memberType}}</td>
 
-	//                         <td class="center" v-show="show">{{item.memberCardNo}}</td>
+	//                         <td class="center">{{item.memberCardNo}}</td>
+
+	//                         <td class="center">{{item.memberCardNo}}</td>
+
+	//                         <td class="center">{{item.memberCardNo}}</td>
+
+	//                         <td class="center">{{item.memberCardNo}}</td>
+
+	//                         <td class="center">
+
+	//                             <button class="btn btn-default" v-on:click="showModal('mymodal2')">变更</button>
+
+	//                             <button class="btn btn-default" v-on:click="showModal('mymodal3')">预览</button>
+
+	//                             <button class="btn btn-default" v-on:click="showModal('mymodal4')">取消</button>
+
+	//                         </td>
 
 	//                     </tr>
 
@@ -11260,9 +11282,9 @@
 
 	//     </div>
 
-	//     <!-- Modal -->
+	//     <!-- Modal1 -->
 
-	//     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	//     <div class="modal" id="mymodal1" role="dialog" aria-labelledby="gridSystemModalLabel">
 
 	//       <div class="modal-dialog" role="document">
 
@@ -11270,31 +11292,851 @@
 
 	//           <div class="modal-header">
 
-	//             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	//             <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="showModal('mymodal1')"><span aria-hidden="true">&times;</span></button>
 
-	//             <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	//             <h4 class="modal-title" id="gridSystemModalLabel">创建（预约）挂号</h4>
 
 	//           </div>
 
 	//           <div class="modal-body">
 
-	//             ...
+	//             <form class="form-horizontal">
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">性别</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">手机</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="number" class="form-control" id="inputEmail3" placeholder="手机号">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">科室</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">医生</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">挂号费</label>
+
+	//                 <div class="col-sm-4 disabled">
+
+	//                     <input type="text" class="form-control" value="10" disabled/>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">支付方式</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">会员类型</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">日期</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="email" class="form-control" id="inputEmail3" placeholder="日期">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">时段</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">推荐人</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">门诊内容</label>
+
+	//                 <div class="col-sm-10">
+
+	//                   <textarea class="form-control"></textarea>
+
+	//                 </div>
+
+	//               </div>
+
+	//             </form>
 
 	//           </div>
 
 	//           <div class="modal-footer">
 
-	//             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	//             <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal1')">Close</button>
 
-	//             <button type="button" class="btn btn-primary">Save changes</button>
+	//             <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal1')">Save changes</button>
 
 	//           </div>
 
-	//         </div>
+	//         </div><!-- /.modal-content -->
 
-	//       </div>
+	//       </div><!-- /.modal-dialog -->
 
-	//     </div>
+	//     </div><!-- /.modal -->
+
+	//     <!-- Modal2 -->
+
+	//     <div class="modal" id="mymodal2" role="dialog" aria-labelledby="gridSystemModalLabel">
+
+	//       <div class="modal-dialog" role="document">
+
+	//         <div class="modal-content">
+
+	//           <div class="modal-header">
+
+	//             <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="showModal('mymodal2')"><span aria-hidden="true">&times;</span></button>
+
+	//             <h4 class="modal-title" id="gridSystemModalLabel">（预约）挂号变更</h4>
+
+	//           </div>
+
+	//           <div class="modal-body">
+
+	//             <form class="form-horizontal">
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">性别</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">手机</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="number" class="form-control" id="inputEmail3" placeholder="手机号">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">科室</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">医生</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">挂号费</label>
+
+	//                 <div class="col-sm-4 disabled">
+
+	//                     <input type="text" class="form-control" value="10" disabled/>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">支付方式</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">会员类型</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">日期</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="email" class="form-control" id="inputEmail3" placeholder="日期">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">时段</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">推荐人</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">门诊内容</label>
+
+	//                 <div class="col-sm-10">
+
+	//                   <textarea class="form-control"></textarea>
+
+	//                 </div>
+
+	//               </div>
+
+	//             </form>
+
+	//           </div>
+
+	//           <div class="modal-footer">
+
+	//             <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal2')">Close</button>
+
+	//             <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal2')">Save changes</button>
+
+	//           </div>
+
+	//         </div><!-- /.modal-content -->
+
+	//       </div><!-- /.modal-dialog -->
+
+	//     </div><!-- /.modal -->
+
+	//     <!-- Modal3 -->
+
+	//     <div class="modal" id="mymodal3" role="dialog" aria-labelledby="gridSystemModalLabel">
+
+	//       <div class="modal-dialog" role="document">
+
+	//         <div class="modal-content">
+
+	//           <div class="modal-header">
+
+	//             <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="showModal('mymodal3')"><span aria-hidden="true">&times;</span></button>
+
+	//             <h4 class="modal-title" id="gridSystemModalLabel">*****医院挂号单</h4>
+
+	//           </div>
+
+	//           <div class="modal-body">
+
+	//             <form class="form-horizontal">
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">性别</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">手机</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="number" class="form-control" id="inputEmail3" placeholder="手机号">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">科室</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">医生</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">挂号费</label>
+
+	//                 <div class="col-sm-4 disabled">
+
+	//                     <input type="text" class="form-control" value="10" disabled/>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">支付方式</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">会员类型</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">日期</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="email" class="form-control" id="inputEmail3" placeholder="日期">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">时段</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">推荐人</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">门诊内容</label>
+
+	//                 <div class="col-sm-10">
+
+	//                   <textarea class="form-control"></textarea>
+
+	//                 </div>
+
+	//               </div>
+
+	//             </form>
+
+	//           </div>
+
+	//           <div class="modal-footer">
+
+	//             <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal3')">Close</button>
+
+	//             <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal3')">Save changes</button>
+
+	//           </div>
+
+	//         </div><!-- /.modal-content -->
+
+	//       </div><!-- /.modal-dialog -->
+
+	//     </div><!-- /.modal -->
+
+	//     <!-- Modal4 -->
+
+	//     <div class="modal" id="mymodal4" role="dialog" aria-labelledby="gridSystemModalLabel">
+
+	//       <div class="modal-dialog" role="document">
+
+	//         <div class="modal-content">
+
+	//           <div class="modal-header">
+
+	//             <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-on:click="showModal('mymodal4')"><span aria-hidden="true">&times;</span></button>
+
+	//             <h4 class="modal-title" id="gridSystemModalLabel">（预约）挂号取消</h4>
+
+	//           </div>
+
+	//           <div class="modal-body">
+
+	//             <form class="form-horizontal">
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">性别</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">手机</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="number" class="form-control" id="inputEmail3" placeholder="手机号">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">科室</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">医生</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">挂号费</label>
+
+	//                 <div class="col-sm-4 disabled">
+
+	//                     <input type="text" class="form-control" value="10" disabled/>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">支付方式</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">会员类型</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">日期</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <input type="email" class="form-control" id="inputEmail3" placeholder="日期">
+
+	//                 </div>
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">时段</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">推荐人</label>
+
+	//                 <div class="col-sm-4">
+
+	//                   <select class="form-control" id="inputEmail3">
+
+	//                     <option value="">选择</option>
+
+	//                     <option value="">内科</option>
+
+	//                     <option value="">外科</option>
+
+	//                   </select>
+
+	//                 </div>
+
+	//               </div>
+
+	//               <div class="form-group">
+
+	//                 <label for="inputEmail3" class="col-sm-2 control-label">门诊内容</label>
+
+	//                 <div class="col-sm-10">
+
+	//                   <textarea class="form-control"></textarea>
+
+	//                 </div>
+
+	//               </div>
+
+	//             </form>
+
+	//           </div>
+
+	//           <div class="modal-footer">
+
+	//             <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal4')">Close</button>
+
+	//             <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal4')">Save changes</button>
+
+	//           </div>
+
+	//         </div><!-- /.modal-content -->
+
+	//       </div><!-- /.modal-dialog -->
+
+	//     </div><!-- /.modal -->
 
 	// </template>
 
@@ -11334,34 +12176,14 @@
 	        }
 	    },
 	    methods: {
-	        allPatient: function allPatient(pageIdx) {
+	        todayPatient: function todayPatient(pageIdx, str) {
 	            this.query.pageIndex = typeof pageIdx == "number" ? pageIdx : 1;
 	            this.query.pageSize = 10;
 	            var condition = this.query;
 	            condition["x-auth-token"] = localStorage.token;
 	            console.log(">>>>" + (0, _stringify2.default)(this.query));
 	            this.$http.get("http://121.42.171.213:8080/api/registrations/all", condition, function (data, status, request) {
-	                this.patients = data.data.rows;
-	                this.query.totalCount = data.data.count;
-	                this.query.pageIndex = data.data.pageIndex;
-	                this.isActiveA = false;
-	                this.isActiveB = true;
-	                this.ta = "a";
-	            }).error(function (data, status, request) {
-	                console.log("err:" + data + "status:" + status + "request:" + request);
-	            });
-	        },
-	        todayPatient: function todayPatient(pageIdx, str) {
-	            if (str == "a") {
-	                this.allPatient(pageIdx);
-	                return;
-	            }
-	            this.query.pageIndex = typeof pageIdx == "number" ? pageIdx : 1;
-	            this.query.pageSize = 10;
-	            var condition = this.query;
-	            condition["x-auth-token"] = localStorage.token;
-	            console.log(">>>>" + (0, _stringify2.default)(this.query));
-	            this.$http.get("http://121.42.171.213:8080/api/registrations/today", condition, function (data, status, request) {
+	                console.log(">>>>data:" + (0, _stringify2.default)(data));
 	                this.patients = data.data.rows;
 	                this.query.totalCount = data.data.count;
 	                this.query.pageIndex = data.data.pageIndex;
@@ -11385,6 +12207,9 @@
 	            }).error(function (data, status, request) {
 	                console.log("err:" + data + "status:" + status + "request:" + request);
 	            });
+	        },
+	        showModal: function showModal(id) {
+	            $("#" + id).toggle();
 	        }
 	    }
 	};
@@ -11394,7 +12219,7 @@
 /* 51 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"box-inner\">\r\n        <div class=\"box-header well\" data-original-title=\"\">\r\n            <h2><i class=\"glyphicon glyphicon-user\"></i>{{pageTitle || \"预约挂号\"}}</h2>\r\n            <div class=\"box-icon\">\r\n                <a href=\"#\" class=\"btn btn-minimize btn-round btn-default\"><i\r\n                        class=\"glyphicon glyphicon-chevron-up\"></i></a>\r\n                <a href=\"#\" class=\"btn btn-close btn-round btn-default\"><i\r\n                        class=\"glyphicon glyphicon-remove\"></i></a>\r\n            </div>\r\n        </div>\r\n        <div class=\"box col-md-12\">\r\n            <form class=\"form-inline\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">患者姓名:</label>\r\n                    <input type=\"text\" class=\"form-control\" placeholder=\"患者姓名\" value=\"{{query.patientName}}\" v-model=\"query.patientName\">\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">手机号:</label>\r\n                    <input type=\"text\" class=\"form-control\" placeholder=\"手机号\" value=\"{{query.patientMobile}}\" v-model=\"query.patientMobile\">\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">就诊科室:</label>\r\n                    <select class=\"form-control\" v-model=\"query.departmentId\">\r\n                        <option value=\"\">全部</option>\r\n                        <template v-for=\"depart in departments\">\r\n                        <option value=\"{{depart.id}}\">{{depart.name}}</option>\r\n                        </template>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">挂号类型:</label>\r\n                    <select class=\"form-control\" v-model=\"query.registrationType\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"线上预约\">线上预约</option>\r\n                        <option value=\"线下预约\">线下预约</option>\r\n                        <option value=\"到院支付\">到院支付</option>\r\n                        <option value=\"销售代约\">销售代约</option>\r\n                        <option value=\"线下加号\">线下加号</option>\r\n                        <option value=\"销售加号\">销售加号</option>\r\n                        <option value=\"现场挂号\">现场挂号</option>\r\n                        <option value=\"网上挂号\">网上挂号</option>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">医生:</label>\r\n                    <select class=\"form-control\" v-model=\"query.doctorId\">\r\n                        <option value=\"\">全部</option>\r\n                        <template v-for=\"doctor in doctors\">\r\n                        <option value=\"{{doctor.id}}\">{{doctor.name}}</option>\r\n                        </template>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">门诊状态:</label>\r\n                    <select class=\"form-control\" v-model=\"query.status\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"初诊\">初诊</option>\r\n                        <option value=\"复诊\">复诊</option>\r\n                        <option value=\"院内转诊\">院内转诊</option>\r\n                        <option value=\"跨院转诊\">跨院转诊</option>\r\n                        <option value=\"远程会诊\">远程会诊</option>\r\n                        <option value=\"远程初诊\">远程初诊</option>\r\n                        <option value=\"远程复诊\">远程复诊</option>\r\n                    </select>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">会员类型:</label>\r\n                    <select class=\"form-control\" v-model=\"query.memberType\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"初级用户\">初级用户</option>\r\n                        <option value=\"银卡用户\">银卡用户</option>\r\n                        <option value=\"3\">金卡用户</option>\r\n                        <option value=\"金卡用户\">学校用户</option>\r\n                        <option value=\"企业用户\">企业用户</option>\r\n                        <option value=\"儿童用户\">儿童用户</option>\r\n                    </select>\r\n                    <button type=\"submit\" class=\"btn btn-default\" v-on:click=\"todayPatient(1, ta)\">搜索</button>\r\n                </div>\r\n            </form>\r\n        </div>\r\n        <div class=\"box col-md-12\">\r\n            <p>\r\n                <a class=\"btn btn-default btn-sm\" href=\"\">\r\n                    <i class=\"glyphicon glyphicon-plus\"></i>新增\r\n                </a>\r\n            </p>\r\n        </div>\r\n        <div class=\"box-content\">\r\n            <table class=\"table table-striped table-bordered responsive\" id=\"groupList\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>患者名称</th>\r\n                        <th>手机号</th>\r\n                        <th>性别</th>\r\n                        <th>就诊时间</th>\r\n                        <th>就诊科室</th>\r\n                        <th>挂号类型</th>\r\n                        <th>医生</th>\r\n                        <th>门诊号</th>\r\n                        <th>门诊内容</th>\r\n                        <th>挂号费</th>\r\n                        <th>卡内余额</th>\r\n                        <th>门诊状态</th>\r\n                        <th>会员类型</th>\r\n                        <th>挂号时间</th>\r\n                        <th>推荐人</th>\r\n                        <th>预约状态</th>\r\n                        <th>操作</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr v-for=\"item in patients\">\r\n                        <td class=\"center\">{{item.patientName}}</td>\r\n                        <td class=\"center\">{{item.patientMobile}}</td>\r\n                        <td class=\"center\">{{item.gender}}</td>\r\n                        <td class=\"center\">{{item.registerDate}}</td>\r\n                        <td class=\"center\">{{item.departmentName}}</td>\r\n                        <td class=\"center\">{{item.registrationType}}</td>\r\n                        <td class=\"center\">{{item.doctorName}}</td>\r\n                        <td class=\"center\">{{item.comment}}</td>\r\n                        <td class=\"center\">{{item.status}}</td>\r\n                        <td class=\"center\">{{item.registrationFee}}</td>\r\n                        <td class=\"center\">{{item.balance}}</td>\r\n                        <td class=\"center\">{{item.memberType}}</td>\r\n                        <td class=\"center\" v-show=\"show\">{{item.memberCardNo}}</td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n            <nav>\r\n                <ul class=\"pager\">\r\n                    <li class=\"\"><a @click=\"todayPatient(parseInt(query.pageIndex)-1, ta)\">上一页</a></li>\r\n                    <li>第{{query.pageIndex}}页</li>\r\n                    <li ><a @click=\"todayPatient(parseInt(query.pageIndex)+1, ta)\">下一页</a></li>\r\n                    <li>共{{Math.ceil(query.totalCount/10)}}页</li>\r\n                    <li>共{{query.totalCount}}条</li>\r\n                </ul>\r\n            </nav>\r\n            <router-view></router-view>\r\n        </div>\r\n    </div>\r\n    <!-- Modal -->\r\n    <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\r\n      <div class=\"modal-dialog\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n          <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n            <h4 class=\"modal-title\" id=\"myModalLabel\">Modal title</h4>\r\n          </div>\r\n          <div class=\"modal-body\">\r\n            ...\r\n          </div>\r\n          <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\r\n            <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>";
+	module.exports = "<div class=\"box-inner\">\r\n        <div class=\"box-header well\" data-original-title=\"\">\r\n            <h2><i class=\"glyphicon glyphicon-user\"></i>{{pageTitle || \"预约挂号\"}}</h2>\r\n            <div class=\"box-icon\">\r\n                <a href=\"#\" class=\"btn btn-minimize btn-round btn-default\"><i\r\n                        class=\"glyphicon glyphicon-chevron-up\"></i></a>\r\n                <a href=\"#\" class=\"btn btn-close btn-round btn-default\"><i\r\n                        class=\"glyphicon glyphicon-remove\"></i></a>\r\n            </div>\r\n        </div>\r\n        <div class=\"box col-md-12\">\r\n            <form class=\"form-inline\">\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">患者姓名:</label>\r\n                    <input type=\"text\" class=\"form-control\" placeholder=\"患者姓名\" value=\"{{query.patientName}}\" v-model=\"query.patientName\">\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">手机号:</label>\r\n                    <input type=\"text\" class=\"form-control\" placeholder=\"手机号\" value=\"{{query.patientMobile}}\" v-model=\"query.patientMobile\">\r\n                </div>\r\n                <div class=\"form-group\">\r\n                    <label for=\"exampleInputEmail2\">就诊科室:</label>\r\n                    <select class=\"form-control\" v-model=\"query.departmentId\">\r\n                        <option value=\"\">全部</option>\r\n                        <template v-for=\"depart in departments\">\r\n                        <option value=\"{{depart.id}}\">{{depart.name}}</option>\r\n                        </template>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">挂号类型:</label>\r\n                    <select class=\"form-control\" v-model=\"query.registrationType\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"0\">线上预约</option>\r\n                        <option value=\"1\">线下预约</option>\r\n                        <option value=\"2\">现场挂号</option>\r\n                        <option value=\"3\">复诊预约</option>\r\n                        <option value=\"4\">转诊挂号</option>\r\n                        <option value=\"5\">现场加号</option>\r\n                        <option value=\"6\">线上加号</option>\r\n                        <option value=\"7\">销售代约</option>\r\n                        <option value=\"8\">销售加号</option>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">医生:</label>\r\n                    <select class=\"form-control\" v-model=\"query.doctorId\">\r\n                        <option value=\"\">全部</option>\r\n                        <template v-for=\"doctor in doctors\">\r\n                        <option value=\"{{doctor.id}}\">{{doctor.name}}</option>\r\n                        </template>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">门诊状态:</label>\r\n                    <select class=\"form-control\" v-model=\"query.status\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"0\">初诊</option>\r\n                        <option value=\"1\">复诊</option>\r\n                        <option value=\"2\">院内转诊</option>\r\n                        <option value=\"3\">跨院转诊</option>\r\n                        <option value=\"4\">远程会诊</option>\r\n                        <option value=\"5\">远程初诊</option>\r\n                        <option value=\"6\">远程复诊</option>\r\n                    </select>\r\n                    </select>\r\n                    <label for=\"exampleInputEmail2\">会员类型:</label>\r\n                    <select class=\"form-control\" v-model=\"query.memberType\">\r\n                        <option value=\"\">全部</option>\r\n                        <option value=\"0\">初级用户</option>\r\n                        <option value=\"1\">银卡用户</option>\r\n                        <option value=\"2\">金卡用户</option>\r\n                        <option value=\"3\">学校用户</option>\r\n                        <option value=\"4\">企业用户</option>\r\n                        <option value=\"5\">儿童用户</option>\r\n                    </select>\r\n                    <button type=\"submit\" class=\"btn btn-default\" v-on:click=\"todayPatient(1, ta)\">搜索</button>\r\n                </div>\r\n            </form>\r\n        </div>\r\n        <div class=\"box col-md-12\">\r\n            <p>\r\n                <button class=\"btn btn-default btn-sm\" v-on:click=\"showModal('mymodal1')\">\r\n                    <i class=\"glyphicon glyphicon-plus\"></i>新增\r\n                </button>\r\n            </p>\r\n        </div>\r\n        <div class=\"box-content\">\r\n            <table class=\"table table-striped table-bordered responsive\" id=\"groupList\">\r\n                <thead>\r\n                    <tr>\r\n                        <th>患者名称</th>\r\n                        <th>手机号</th>\r\n                        <th>性别</th>\r\n                        <th>就诊时间</th>\r\n                        <th>就诊科室</th>\r\n                        <th>挂号类型</th>\r\n                        <th>医生</th>\r\n                        <th>门诊号</th>\r\n                        <th>门诊内容</th>\r\n                        <th>挂号费</th>\r\n                        <th>卡内余额</th>\r\n                        <th>门诊状态</th>\r\n                        <th>会员类型</th>\r\n                        <th>挂号时间</th>\r\n                        <th>推荐人</th>\r\n                        <th>预约状态</th>\r\n                        <th>操作</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    <tr v-for=\"item in patients\">\r\n                        <td class=\"center\">{{item.patientName}}</td>\r\n                        <td class=\"center\">{{item.patientMobile}}</td>\r\n                        <td class=\"center\">{{item.gender}}</td>\r\n                        <td class=\"center\">{{item.registerDate}}</td>\r\n                        <td class=\"center\">{{item.departmentName}}</td>\r\n                        <td class=\"center\">{{item.registrationType}}</td>\r\n                        <td class=\"center\">{{item.doctorName}}</td>\r\n                        <td class=\"center\">{{item.comment}}</td>\r\n                        <td class=\"center\">{{item.status}}</td>\r\n                        <td class=\"center\">{{item.registrationFee}}</td>\r\n                        <td class=\"center\">{{item.balance}}</td>\r\n                        <td class=\"center\">{{item.memberType}}</td>\r\n                        <td class=\"center\">{{item.memberCardNo}}</td>\r\n                        <td class=\"center\">{{item.memberCardNo}}</td>\r\n                        <td class=\"center\">{{item.memberCardNo}}</td>\r\n                        <td class=\"center\">{{item.memberCardNo}}</td>\r\n                        <td class=\"center\">\r\n                            <button class=\"btn btn-default\" v-on:click=\"showModal('mymodal2')\">变更</button>\r\n                            <button class=\"btn btn-default\" v-on:click=\"showModal('mymodal3')\">预览</button>\r\n                            <button class=\"btn btn-default\" v-on:click=\"showModal('mymodal4')\">取消</button>\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n            <nav>\r\n                <ul class=\"pager\">\r\n                    <li class=\"\"><a @click=\"todayPatient(parseInt(query.pageIndex)-1, ta)\">上一页</a></li>\r\n                    <li>第{{query.pageIndex}}页</li>\r\n                    <li ><a @click=\"todayPatient(parseInt(query.pageIndex)+1, ta)\">下一页</a></li>\r\n                    <li>共{{Math.ceil(query.totalCount/10)}}页</li>\r\n                    <li>共{{query.totalCount}}条</li>\r\n                </ul>\r\n            </nav>\r\n            <router-view></router-view>\r\n        </div>\r\n    </div>\r\n    <!-- Modal1 -->\r\n    <div class=\"modal\" id=\"mymodal1\" role=\"dialog\" aria-labelledby=\"gridSystemModalLabel\">\r\n      <div class=\"modal-dialog\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n          <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" v-on:click=\"showModal('mymodal1')\"><span aria-hidden=\"true\">&times;</span></button>\r\n            <h4 class=\"modal-title\" id=\"gridSystemModalLabel\">创建（预约）挂号</h4>\r\n          </div>\r\n          <div class=\"modal-body\">\r\n            <form class=\"form-horizontal\">\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">姓名</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Email\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">性别</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">手机</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"number\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"手机号\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">科室</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">医生</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">挂号费</label>\r\n                <div class=\"col-sm-4 disabled\">\r\n                    <input type=\"text\" class=\"form-control\" value=\"10\" disabled/>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">支付方式</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">会员类型</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">日期</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"日期\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">时段</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">推荐人</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">门诊内容</label>\r\n                <div class=\"col-sm-10\">\r\n                  <textarea class=\"form-control\"></textarea>\r\n                </div>\r\n              </div>\r\n            </form>\r\n          </div>\r\n          <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" v-on:click=\"showModal('mymodal1')\">Close</button>\r\n            <button type=\"button\" class=\"btn btn-primary\" v-on:click=\"showModal('mymodal1')\">Save changes</button>\r\n          </div>\r\n        </div><!-- /.modal-content -->\r\n      </div><!-- /.modal-dialog -->\r\n    </div><!-- /.modal -->\r\n    <!-- Modal2 -->\r\n    <div class=\"modal\" id=\"mymodal2\" role=\"dialog\" aria-labelledby=\"gridSystemModalLabel\">\r\n      <div class=\"modal-dialog\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n          <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" v-on:click=\"showModal('mymodal2')\"><span aria-hidden=\"true\">&times;</span></button>\r\n            <h4 class=\"modal-title\" id=\"gridSystemModalLabel\">（预约）挂号变更</h4>\r\n          </div>\r\n          <div class=\"modal-body\">\r\n            <form class=\"form-horizontal\">\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">姓名</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Email\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">性别</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">手机</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"number\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"手机号\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">科室</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">医生</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">挂号费</label>\r\n                <div class=\"col-sm-4 disabled\">\r\n                    <input type=\"text\" class=\"form-control\" value=\"10\" disabled/>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">支付方式</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">会员类型</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">日期</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"日期\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">时段</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">推荐人</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">门诊内容</label>\r\n                <div class=\"col-sm-10\">\r\n                  <textarea class=\"form-control\"></textarea>\r\n                </div>\r\n              </div>\r\n            </form>\r\n          </div>\r\n          <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" v-on:click=\"showModal('mymodal2')\">Close</button>\r\n            <button type=\"button\" class=\"btn btn-primary\" v-on:click=\"showModal('mymodal2')\">Save changes</button>\r\n          </div>\r\n        </div><!-- /.modal-content -->\r\n      </div><!-- /.modal-dialog -->\r\n    </div><!-- /.modal -->\r\n    <!-- Modal3 -->\r\n    <div class=\"modal\" id=\"mymodal3\" role=\"dialog\" aria-labelledby=\"gridSystemModalLabel\">\r\n      <div class=\"modal-dialog\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n          <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" v-on:click=\"showModal('mymodal3')\"><span aria-hidden=\"true\">&times;</span></button>\r\n            <h4 class=\"modal-title\" id=\"gridSystemModalLabel\">*****医院挂号单</h4>\r\n          </div>\r\n          <div class=\"modal-body\">\r\n            <form class=\"form-horizontal\">\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">姓名</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Email\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">性别</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">手机</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"number\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"手机号\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">科室</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">医生</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">挂号费</label>\r\n                <div class=\"col-sm-4 disabled\">\r\n                    <input type=\"text\" class=\"form-control\" value=\"10\" disabled/>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">支付方式</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">会员类型</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">日期</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"日期\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">时段</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">推荐人</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">门诊内容</label>\r\n                <div class=\"col-sm-10\">\r\n                  <textarea class=\"form-control\"></textarea>\r\n                </div>\r\n              </div>\r\n            </form>\r\n          </div>\r\n          <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" v-on:click=\"showModal('mymodal3')\">Close</button>\r\n            <button type=\"button\" class=\"btn btn-primary\" v-on:click=\"showModal('mymodal3')\">Save changes</button>\r\n          </div>\r\n        </div><!-- /.modal-content -->\r\n      </div><!-- /.modal-dialog -->\r\n    </div><!-- /.modal -->\r\n    <!-- Modal4 -->\r\n    <div class=\"modal\" id=\"mymodal4\" role=\"dialog\" aria-labelledby=\"gridSystemModalLabel\">\r\n      <div class=\"modal-dialog\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n          <div class=\"modal-header\">\r\n            <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\" v-on:click=\"showModal('mymodal4')\"><span aria-hidden=\"true\">&times;</span></button>\r\n            <h4 class=\"modal-title\" id=\"gridSystemModalLabel\">（预约）挂号取消</h4>\r\n          </div>\r\n          <div class=\"modal-body\">\r\n            <form class=\"form-horizontal\">\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">姓名</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Email\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">性别</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">手机</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"number\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"手机号\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">科室</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">医生</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">挂号费</label>\r\n                <div class=\"col-sm-4 disabled\">\r\n                    <input type=\"text\" class=\"form-control\" value=\"10\" disabled/>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">支付方式</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">会员类型</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">日期</label>\r\n                <div class=\"col-sm-4\">\r\n                  <input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"日期\">\r\n                </div>\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">时段</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">推荐人</label>\r\n                <div class=\"col-sm-4\">\r\n                  <select class=\"form-control\" id=\"inputEmail3\">\r\n                    <option value=\"\">选择</option>\r\n                    <option value=\"\">内科</option>\r\n                    <option value=\"\">外科</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"inputEmail3\" class=\"col-sm-2 control-label\">门诊内容</label>\r\n                <div class=\"col-sm-10\">\r\n                  <textarea class=\"form-control\"></textarea>\r\n                </div>\r\n              </div>\r\n            </form>\r\n          </div>\r\n          <div class=\"modal-footer\">\r\n            <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" v-on:click=\"showModal('mymodal4')\">Close</button>\r\n            <button type=\"button\" class=\"btn btn-primary\" v-on:click=\"showModal('mymodal4')\">Save changes</button>\r\n          </div>\r\n        </div><!-- /.modal-content -->\r\n      </div><!-- /.modal-dialog -->\r\n    </div><!-- /.modal -->";
 
 /***/ },
 /* 52 */
@@ -12002,7 +12827,24 @@
 	    props: ['pageTitle'],
 	    data: function data() {
 	        return {
-	            patients: []
+	            patients: [],
+	            show: false,
+	            departments: [],
+	            doctors: [],
+	            isActiveA: true,
+	            isActiveB: false,
+	            ta: "t",
+	            query: {
+	                totalCount: 0,
+	                pageIndex: 0,
+	                patientName: "",
+	                patientMobile: "",
+	                departmentId: "",
+	                registrationType: "",
+	                doctorId: "",
+	                status: "",
+	                memberType: ""
+	            }
 	        };
 	    },
 	    route: {

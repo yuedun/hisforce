@@ -34,14 +34,15 @@
                     <label for="exampleInputEmail2">挂号类型:</label>
                     <select class="form-control" v-model="query.registrationType">
                         <option value="">全部</option>
-                        <option value="线上预约">线上预约</option>
-                        <option value="线下预约">线下预约</option>
-                        <option value="到院支付">到院支付</option>
-                        <option value="销售代约">销售代约</option>
-                        <option value="线下加号">线下加号</option>
-                        <option value="销售加号">销售加号</option>
-                        <option value="现场挂号">现场挂号</option>
-                        <option value="网上挂号">网上挂号</option>
+                        <option value="0">线上预约</option>
+                        <option value="1">线下预约</option>
+                        <option value="2">现场挂号</option>
+                        <option value="3">复诊预约</option>
+                        <option value="4">转诊挂号</option>
+                        <option value="5">现场加号</option>
+                        <option value="6">线上加号</option>
+                        <option value="7">销售代约</option>
+                        <option value="8">销售加号</option>
                     </select>
                     <label for="exampleInputEmail2">医生:</label>
                     <select class="form-control" v-model="query.doctorId">
@@ -53,24 +54,24 @@
                     <label for="exampleInputEmail2">门诊状态:</label>
                     <select class="form-control" v-model="query.status">
                         <option value="">全部</option>
-                        <option value="初诊">初诊</option>
-                        <option value="复诊">复诊</option>
-                        <option value="院内转诊">院内转诊</option>
-                        <option value="跨院转诊">跨院转诊</option>
-                        <option value="远程会诊">远程会诊</option>
-                        <option value="远程初诊">远程初诊</option>
-                        <option value="远程复诊">远程复诊</option>
+                        <option value="0">初诊</option>
+                        <option value="1">复诊</option>
+                        <option value="2">院内转诊</option>
+                        <option value="3">跨院转诊</option>
+                        <option value="4">远程会诊</option>
+                        <option value="5">远程初诊</option>
+                        <option value="6">远程复诊</option>
                     </select>
                     </select>
                     <label for="exampleInputEmail2">会员类型:</label>
                     <select class="form-control" v-model="query.memberType">
                         <option value="">全部</option>
-                        <option value="初级用户">初级用户</option>
-                        <option value="银卡用户">银卡用户</option>
-                        <option value="3">金卡用户</option>
-                        <option value="金卡用户">学校用户</option>
-                        <option value="企业用户">企业用户</option>
-                        <option value="儿童用户">儿童用户</option>
+                        <option value="0">初级用户</option>
+                        <option value="1">银卡用户</option>
+                        <option value="2">金卡用户</option>
+                        <option value="3">学校用户</option>
+                        <option value="4">企业用户</option>
+                        <option value="5">儿童用户</option>
                     </select>
                     <button type="submit" class="btn btn-default" v-on:click="todayPatient(1, ta)">搜索</button>
                 </div>
@@ -171,7 +172,6 @@
                 console.log(">>>>"+JSON.stringify(this.query))
                 this.$http.get("http://121.42.171.213:8080/api/registrations/all", 
                     condition, 
-                    {"x-auth-token":localStorage.token},
                     function (data, status, request) {
                         this.patients = data.data.rows;
                         this.query.totalCount = data.data.count;
@@ -195,7 +195,6 @@
                 console.log(">>>>"+JSON.stringify(this.query))
                 this.$http.get("http://121.42.171.213:8080/api/registrations/today", 
                     condition, 
-                    {"x-auth-token":localStorage.token},
                     function (data, status, request) {
                         this.patients = data.data.rows;
                         this.query.totalCount = data.data.count;
@@ -217,6 +216,7 @@
                     });
             },
             getDoctor: function(){
+                //121.42.171.213
                 this.$http.get("http://121.42.171.213:8080/api/dict/doctors", 
                     {"x-auth-token":localStorage.token}, 
                     function (data, status, request) {

@@ -3,6 +3,7 @@ var VueRouter = require('./vendor/vue-router.min');
 Vue.use(VueRouter);
 var VueResource = require('./vendor/vue-resource.min');
 Vue.use(VueResource);
+Vue.config.debug = true;//调试模式
 // 定义组件
 var Foo = Vue.extend({
 	template: '<div class="foo">' + 

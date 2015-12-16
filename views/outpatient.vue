@@ -291,7 +291,24 @@
         props: ['pageTitle'],
         data: function(){
             return {
-                patients: []
+                patients: [],
+                show: false,
+                departments: [],
+                doctors: [],
+                isActiveA:true,
+                isActiveB:false,
+                ta: "t",
+                query:{
+                    totalCount: 0,
+                    pageIndex: 0,
+                    patientName:"",
+                    patientMobile:"",
+                    departmentId:"",
+                    registrationType:"",
+                    doctorId:"",
+                    status:"",
+                    memberType:""
+                }
             }
         },
         route:{
