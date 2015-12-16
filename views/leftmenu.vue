@@ -25,8 +25,8 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="nav nav-pills nav-stacked" v-bind:style="{display: display}">
-							<li><a v-link="{name:'todayWork', query:{pageTitle:'门诊中心'}}"><span>门诊中心</span></a></li>
-							<li><a v-link="{name:'todayWork', query:{pageTitle:'我的预约'}}"><span>我的预约</span></a></li>
+							<li><a v-link="{name:'outpatient', query:{pageTitle:'门诊中心'}}"><span>门诊中心</span></a></li>
+							<li><a v-link="{name:'myReservation', query:{pageTitle:'我的预约'}}"><span>我的预约</span></a></li>
 						</ul>
 					</li>
 					<li class="accordion">
@@ -83,17 +83,17 @@
 </template>
 <script>
 	module.exports= {
-	        data: function(){
-	            return {
-	            	active: false,
-	            	display: "none"
-	            }
-	        },
-	        methods:{
-	        	open:function(el){
-	        		this.active = true;
-	        		this.display = "block";
-	        	}
-	        }
-	    }
+        data: function(){
+            return {
+            	active: false,
+            	display: "none"
+            }
+        },
+        methods:{
+        	open:function(el){
+        		this.active = true;
+        		this.display = "block";
+        	}
+        }
+    }
 </script>

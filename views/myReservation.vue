@@ -1,7 +1,7 @@
 <template>
     <div class="box-inner">
         <div class="box-header well" data-original-title="">
-            <h2><i class="glyphicon glyphicon-user"></i>{{pageTitle || "今日工作"}}</h2>
+            <h2><i class="glyphicon glyphicon-user"></i>{{pageTitle || "我的预约"}}</h2>
             <div class="box-icon">
                 <a href="#" class="btn btn-minimize btn-round btn-default"><i
                         class="glyphicon glyphicon-chevron-up"></i></a>
@@ -9,10 +9,6 @@
                         class="glyphicon glyphicon-remove"></i></a>
             </div>
         </div>
-        <ul class="nav nav-tabs">
-            <li role="presentation" v-bind:class="{'active': isActiveA}"><a v-on:click="todayPatient(1)">今日患者</a></li>
-            <li role="presentation" v-bind:class="{'active': isActiveB}"><a v-on:click="allPatient(1)">全部患者</a></li>
-        </ul>
         <div class="box col-md-12">
             <form class="form-inline">
                 <div class="form-group">

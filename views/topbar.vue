@@ -8,7 +8,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="/admin">
+		<a class="navbar-brand" href="javascript:void(0)">
 			<img alt="Charisma Logo" src="" class="hidden-xs" />
 			<span>云大夫</span></a>
 		<!-- user dropdown starts -->

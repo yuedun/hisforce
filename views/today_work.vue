@@ -171,6 +171,7 @@
                 console.log(">>>>"+JSON.stringify(this.query))
                 this.$http.get("http://121.42.171.213:8080/api/registrations/all", 
                     condition, 
+                    {"x-auth-token":localStorage.token},
                     function (data, status, request) {
                         this.patients = data.data.rows;
                         this.query.totalCount = data.data.count;
@@ -194,6 +195,7 @@
                 console.log(">>>>"+JSON.stringify(this.query))
                 this.$http.get("http://121.42.171.213:8080/api/registrations/today", 
                     condition, 
+                    {"x-auth-token":localStorage.token},
                     function (data, status, request) {
                         this.patients = data.data.rows;
                         this.query.totalCount = data.data.count;

@@ -74,14 +74,15 @@
         </div>
         <div class="box col-md-12">
             <p>
-                <a class="btn btn-default btn-sm" href="/admin/org-add-ui"><i class="glyphicon glyphicon-plus"></i>新增</a>
+                <a class="btn btn-default btn-sm" href="">
+                    <i class="glyphicon glyphicon-plus"></i>新增
+                </a>
             </p>
         </div>
         <div class="box-content">
             <table class="table table-striped table-bordered responsive" id="groupList">
                 <thead>
                     <tr>
-                        <th>序号</th>
                         <th>患者名称</th>
                         <th>手机号</th>
                         <th>性别</th>
@@ -103,7 +104,6 @@
                 </thead>
                 <tbody>
                     <tr v-for="item in patients">
-                        <td class="center">{{$index+1}}</td>
                         <td class="center">{{item.patientName}}</td>
                         <td class="center">{{item.patientMobile}}</td>
                         <td class="center">{{item.gender}}</td>
@@ -131,6 +131,24 @@
             </nav>
             <router-view></router-view>
         </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 <script>
