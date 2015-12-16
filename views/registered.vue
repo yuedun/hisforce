@@ -84,17 +84,17 @@
             <table class="table table-striped table-bordered responsive" id="groupList">
                 <thead>
                     <tr>
-                        <th>患者名称</th>
-                        <th>手机号</th>
+                        <th>姓名</th>
+                        <th>手机</th>
                         <th>性别</th>
                         <th>就诊时间</th>
-                        <th>就诊科室</th>
+                        <th>科室</th>
                         <th>挂号类型</th>
                         <th>医生</th>
                         <th>门诊号</th>
                         <th>门诊内容</th>
                         <th>挂号费</th>
-                        <th>卡内余额</th>
+                        <th>余额</th>
                         <th>门诊状态</th>
                         <th>会员类型</th>
                         <th>挂号时间</th>
@@ -242,8 +242,8 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal1')">Close</button>
-            <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal1')">Save changes</button>
+            <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal1')">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal1')">取消</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -259,24 +259,20 @@
           <div class="modal-body">
             <form class="form-horizontal">
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
-                <div class="col-sm-4">
+                <label for="inputEmail3" class="col-sm-3 control-label">姓名</label>
+                <div class="col-sm-5">
                   <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
                 </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">性别</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                  </select>
-                </div>
               </div>
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">手机</label>
-                <div class="col-sm-4">
+                <label for="inputEmail3" class="col-sm-3 control-label">手机</label>
+                <div class="col-sm-5">
                   <input type="number" class="form-control" id="inputEmail3" placeholder="手机号">
                 </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">科室</label>
-                <div class="col-sm-4">
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-3 control-label">科室</label>
+                <div class="col-sm-5">
                   <select class="form-control" id="inputEmail3">
                     <option value="">选择</option>
                     <option value="">内科</option>
@@ -285,30 +281,8 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">医生</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">挂号费</label>
-                <div class="col-sm-4 disabled">
-                    <input type="text" class="form-control" value="10" disabled/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">支付方式</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">会员类型</label>
-                <div class="col-sm-4">
+                <label for="inputEmail3" class="col-sm-3 control-label">医生</label>
+                <div class="col-sm-5">
                   <select class="form-control" id="inputEmail3">
                     <option value="">选择</option>
                     <option value="">内科</option>
@@ -317,12 +291,14 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">日期</label>
-                <div class="col-sm-4">
+                <label for="inputEmail3" class="col-sm-3 control-label">日期</label>
+                <div class="col-sm-5">
                   <input type="email" class="form-control" id="inputEmail3" placeholder="日期">
                 </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">时段</label>
-                <div class="col-sm-4">
+              </div>
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-3 control-label">时段</label>
+                <div class="col-sm-5">
                   <select class="form-control" id="inputEmail3">
                     <option value="">选择</option>
                     <option value="">内科</option>
@@ -331,26 +307,16 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">推荐人</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">门诊内容</label>
-                <div class="col-sm-10">
+                <label for="inputEmail3" class="col-sm-3 control-label">变更原因</label>
+                <div class="col-sm-9">
                   <textarea class="form-control"></textarea>
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal2')">Close</button>
-            <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal2')">Save changes</button>
+            <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal2')">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal2')">取消</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -364,100 +330,16 @@
             <h4 class="modal-title" id="gridSystemModalLabel">*****医院挂号单</h4>
           </div>
           <div class="modal-body">
-            <form class="form-horizontal">
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
-                <div class="col-sm-4">
-                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">性别</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">手机</label>
-                <div class="col-sm-4">
-                  <input type="number" class="form-control" id="inputEmail3" placeholder="手机号">
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">科室</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">医生</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">挂号费</label>
-                <div class="col-sm-4 disabled">
-                    <input type="text" class="form-control" value="10" disabled/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">支付方式</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">会员类型</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">日期</label>
-                <div class="col-sm-4">
-                  <input type="email" class="form-control" id="inputEmail3" placeholder="日期">
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">时段</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">推荐人</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">门诊内容</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control"></textarea>
-                </div>
-              </div>
-            </form>
+            <p>-----------------------------------------------</p>
+            <p>********科室****医生（**诊位）</p>
+            <p>姓名：张三</p>
+            <p>门诊日期：2015年00月00日  00:00—00:00</p>
+            <p>门诊第01号</p>
+            <p>-----------------------------------------------</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal3')">Close</button>
-            <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal3')">Save changes</button>
+            <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal3')">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal3')">取消</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -473,98 +355,16 @@
           <div class="modal-body">
             <form class="form-horizontal">
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">姓名</label>
-                <div class="col-sm-4">
-                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">性别</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">手机</label>
-                <div class="col-sm-4">
-                  <input type="number" class="form-control" id="inputEmail3" placeholder="手机号">
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">科室</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">医生</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">挂号费</label>
-                <div class="col-sm-4 disabled">
-                    <input type="text" class="form-control" value="10" disabled/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">支付方式</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">会员类型</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">日期</label>
-                <div class="col-sm-4">
-                  <input type="email" class="form-control" id="inputEmail3" placeholder="日期">
-                </div>
-                <label for="inputEmail3" class="col-sm-2 control-label">时段</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">推荐人</label>
-                <div class="col-sm-4">
-                  <select class="form-control" id="inputEmail3">
-                    <option value="">选择</option>
-                    <option value="">内科</option>
-                    <option value="">外科</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">门诊内容</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control"></textarea>
+                <label for="inputEmail3" class="col-sm-12">取消原因</label>
+                <div class="col-sm-12">
+                  <textarea class="form-control" rows="4"></textarea>
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal4')">Close</button>
-            <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal4')">Save changes</button>
+            <button type="button" class="btn btn-primary" v-on:click="showModal('mymodal4')">确定</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="showModal('mymodal4')">取消</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -615,7 +415,6 @@
                 this.$http.get("http://121.42.171.213:8080/api/registrations/all", 
                     condition, 
                     function (data, status, request) {
-                        console.log(">>>>data:"+JSON.stringify(data))
                         this.patients = data.data.rows;
                         this.query.totalCount = data.data.count;
                         this.query.pageIndex = data.data.pageIndex;
